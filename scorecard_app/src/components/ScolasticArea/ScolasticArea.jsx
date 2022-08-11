@@ -32,20 +32,22 @@ export const ScolasticArea = () => {
         <tr>
           <td>1</td>
           <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>65</td>
+          <td>15</td>
+          <td>60</td>
+          <td>10</td>
+          <td>150</td>
         </tr>
         <tr>
           <td>2</td>
           <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <td>65</td>
+          <td>15</td>
+          <td>60</td>
+          <td>10</td>
+          <td>150</td>
         </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        
       </tbody>
     </Table>
   );
