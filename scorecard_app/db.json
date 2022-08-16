@@ -1,0 +1,213 @@
+{
+	"scolasticsarea": [
+		{
+			"id": 1,
+			"subject": "English",
+			"fa": "65",
+			"f_oral": "15",
+			"sa": "60",
+			"s_oral": "10",
+			"total_mark": "150"
+		},
+		{
+			"id": 2,
+			"subject": "Hindi",
+			"fa": "75",
+			"f_oral": "20",
+			"sa": "70",
+			"s_oral": "20",
+			"total_mark": "185"
+		},
+		{
+			"id": 3,
+			"subject": "Sanskrit",
+			"fa": "60",
+			"f_oral": "10",
+			"sa": "65",
+			"s_oral": "15",
+			"total_mark": "150"
+		},
+		{
+			"id": 4,
+			"subject": "Math",
+			"fa": "60",
+			"f_oral": "20",
+			"sa": "70",
+			"s_oral": "20",
+			"total_mark": "170"
+		},
+		{
+			"id": 5,
+			"subject": "EVS",
+			"fa": "70",
+			"f_oral": "15",
+			"sa": "70",
+			"s_oral": "10",
+			"total_mark": "165"
+		},
+		{
+			"id": 6,
+			"subject": "Social Study",
+			"fa": "55",
+			"f_oral": "15",
+			"sa": "60",
+			"s_oral": "10",
+			"total_mark": "140"
+		},
+		{
+			"id": 7,
+			"subject": "Computer",
+			"fa": "60",
+			"f_oral": "10",
+			"sa": "50",
+			"s_oral": "20",
+			"total_mark": "140"
+		},
+		{
+			"id": 8,
+			"subject": "Moral",
+			"fa": "55",
+			"f_oral": "10",
+			"sa": "50",
+			"s_oral": "15",
+			"total_mark": "130"
+		},
+		{
+			"id": 9,
+			"subject": "G.K.",
+			"fa": "60",
+			"f_oral": "20",
+			"sa": "50",
+			"s_oral": "20",
+			"total_mark": "150"
+		},
+		{
+			"id": 10,
+			"subject": "Conversation",
+			"fa": "66",
+			"f_oral": "14",
+			"sa": "70",
+			"s_oral": "10",
+			"total_mark": "160"
+		},
+		{
+			"id": 11,
+			"subject": "Drawing",
+			"fa": "80",
+			"f_oral": "20",
+			"sa": "80",
+			"s_oral": "20",
+			"total_mark": "200"
+		}
+	],
+	"coscalasticsarea": [
+		{
+			"id": 1,
+			"skill": "Development & Maturity",
+			"grade": "A+"
+		},
+		{
+			"id": 2,
+			"skill": "Responsibility",
+			"grade": "A+"
+		},
+		{
+			"id": 3,
+			"skill": "Self Confidence",
+			"grade": "A"
+		},
+		{
+			"id": 4,
+			"skill": "Participation in Group Work",
+			"grade": "A"
+		},
+		{
+			"id": 5,
+			"skill": "Neatness",
+			"grade": "A+"
+		},
+		{
+			"id": 6,
+			"skill": "Music",
+			"grade": "A+"
+		},
+		{
+			"id": 7,
+			"skill": "Discipline",
+			"grade": "A"
+		},
+		{
+			"id": 8,
+			"skill": "Hand Work",
+			"grade": "A+"
+		},
+		{
+			"id": 9,
+			"skill": "Attitude towards home work",
+			"grade": "A"
+		},
+		{
+			"id": 10,
+			"skill": "Craft",
+			"grade": "B+"
+		},
+		{
+			"id": 11,
+			"skill": "Regularity and punctuality",
+			"grade": "A"
+		}
+	],
+	"attendance": [
+		{
+			"id": 1,
+			"term": "Term-I",
+			"working_days": "83",
+			"present_days": "83",
+			"percentage": "100"
+		}
+	],
+	"gradingscale": [
+		{
+			"id": 1,
+			"range": "91-100",
+			"grade": "A1",
+			"remarks": "Excellent"
+		},
+		{
+			"id": 2,
+			"range": "81-90",
+			"grade": "A2",
+			"remarks": "Very Good"
+		},
+		{
+			"id": 3,
+			"range": "71-80",
+			"grade": "B1",
+			"remarks": "Good"
+		},
+		{
+			"id": 4,
+			"range": "61-70",
+			"grade": "B2",
+			"remarks": "Satisfactory"
+		},
+		{
+			"id": 5,
+			"range": "51-60",
+			"grade": "C1",
+			"remarks": "Satisfactory"
+		},
+		{
+			"id": 6,
+			"range": "40-50",
+			"grade": "C2",
+			"remarks": "Satisfactory"
+		},
+		{
+			"id": 7,
+			"range": "Below 40",
+			"grade": "D",
+			"remarks": "Fail:Poor"
+		}
+	]
+}

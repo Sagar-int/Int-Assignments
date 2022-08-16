@@ -1,0 +1,29 @@
+.teacher_remark_col{
+    text-align: left;
+    margin-left: 20px;
+}
+
+
+.t_mark_span{
+    font-size: small;
+}
+
+.teach_sign{
+    margin-top: 80px;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.teach_sign p{
+    margin-left: 25px;
+}
+
+.principal_sign_col{
+    text-align: right;
+    margin-right: 20px;
+}
+
+.principal_sign{
+    margin-top: 110px;
+}

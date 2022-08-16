@@ -1,37 +1,49 @@
 .main_container{
-    border: 2px solid black;
+    border: 1px solid black;
     text-align: center;
 }
 
+
+
 .Top_heading{
-    border: 1px solid rgb(0, 255, 60);
     font-weight: 800;
     color: red;
     font-size: 30px;
+    border-bottom: 1px solid black;
 }
 
 .Top_sub_heading{
-    border: 1px solid rgb(0, 251, 255);
     font-weight: 800;
     font-size: 20px;
 }
+.attendence_heading{
+    font-weight: 700;
+    font-size: 20px;
+}
+
 .sub_heading{
-    border: 1px solid rgb(0, 251, 255);
     font-weight: 700;
     font-size: 20px;
     color: blue;
 }
 
-.part1_col{
-    border: 1px solid rgb(195, 0, 255);
-    font-weight: 500;
-    font-size: 20px;
+.part_common_row{
+    /* border: 1px solid rgb(195, 0, 255); */
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    margin-top: 10px;
+}
+.part_column th{
+    font-size: 18px;
     
 }
+.part_2{
+    border-left: 2px solid black;
+}
 
-.part2_col{
-    border: 1px solid rgb(195, 0, 255);
+.footer{
+    border-top: 2px solid black;
     font-weight: 500;
-    font-size: 20px;
-    
+    font-size: 18px;
+    font-style: italic;
 }
