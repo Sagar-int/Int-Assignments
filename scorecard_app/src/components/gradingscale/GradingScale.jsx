@@ -16,7 +16,7 @@ export const GradingScale = () => {
 
 	return (
 		<div>
-			<Table striped bordered hover className="grading_scale_table table_border">
+			<Table striped bordered hover className="grading_scale_table table_border common_width">
 				<thead>
 					<tr>
 						<th>Marks Range</th>

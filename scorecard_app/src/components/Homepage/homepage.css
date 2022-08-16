@@ -1,8 +1,11 @@
 .main_container{
     border: 1px solid black;
     text-align: center;
+    width: auto;
 }
-
+.common_width{
+    width: auto;
+}
 
 
 .Top_heading{
@@ -32,7 +35,18 @@
     border-bottom: 2px solid black;
     border-top: 2px solid black;
     margin-top: 10px;
+    /* display: flex; */
 }
+
+.part1_div{
+    width: 60%;
+}
+.part2_div{
+    width: 40%;
+    border: 1px solid rgb(186, 23, 23);
+}
+
+
 .part_column th{
     font-size: 18px;
     

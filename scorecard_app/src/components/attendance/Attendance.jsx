@@ -13,7 +13,7 @@ export const Attendance = () => {
 	}
 
 	return (
-		<Table striped bordered hover className="table_border">
+		<Table striped bordered hover className="table_border common_width" responsive>
 			<thead>
 				<tr>
 					<th></th>
