@@ -13,7 +13,7 @@ export const CoscalasticsArea = () => {
 	}
 
 	return (
-		<Table bordered hover className="table_border common_width" responsive>
+		<Table bordered hover className="table_border common_width" responsive='sx'>
 			<thead>
 				<tr height="75px">
 					<th></th>

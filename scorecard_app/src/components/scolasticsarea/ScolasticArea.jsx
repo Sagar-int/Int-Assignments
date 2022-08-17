@@ -21,7 +21,7 @@ export const ScolasticArea = () => {
 	}
 
 	return (
-		<Table bordered hover className="table_border common_width" responsive>
+		<Table bordered hover className="table_border common_width" responsive='sx'>
 			<thead>
 				<tr>
 					<th className="table_head" rowspan={2}>
