@@ -3,9 +3,9 @@
     text-align: center;
     width: auto;
 }
-.common_width{
+/* .common_width{
     width: auto;
-}
+} */
 
 
 .Top_heading{
@@ -53,6 +53,11 @@
 }
 .part_2{
     border-left: 2px solid black;
+}
+
+.grade_scale_div{
+    width: 60%;
+    margin: 20px auto 10px auto;
 }
 
 .footer{

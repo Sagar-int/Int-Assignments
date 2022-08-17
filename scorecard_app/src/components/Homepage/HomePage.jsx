@@ -38,10 +38,14 @@ export const HomePage = () => {
 				<Signature />
 			</Row>
 
-			<Row>
+			{/* <Row>
 				<span className="attendence_heading"> Grading Scale</span>
 				<GradingScale />
-			</Row>
+			</Row> */}
+			<div className='grade_scale_div'>
+				<span className="attendence_heading"> Grading Scale</span>
+				<GradingScale />
+			</div>
 
 			<Row>
 				<span className="footer">Our Parents are seen Gold on the Earth</span>
