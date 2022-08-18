@@ -2,94 +2,66 @@ import './mainform.css';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 
 export const MainForm = () => {
+	let subjects = ['English', 'Hindi', 'Sanskrit', 'Math', 'EVS', 'Social Study', 'Computer', 'Moral', 'G.K', 'Conversation', 'Drawing'];
+
+	let skills = [
+		'Development & Maturity',
+		'Responsibility',
+		'Self Confidence',
+		'Participation in Group Work',
+		'Neatness',
+		'Music',
+		'Discipline',
+		'Hand Work',
+		'Attitude towards home work',
+		'Craft',
+		'Regularity and punctuality',
+	];
+
 	return (
 		<>
-			<Form className="main_form">
+			<Form >
 				<h1 className="form_heading">Scorecard Form</h1>
+
 				<Row className="mb-3 row_size">
 					<h4>PART-I : SCOLASTIC AREAS</h4>
-					<Form.Group as={Col} controlId="formGridState">
-						<Form.Label>Subject</Form.Label>
-						<Form.Select defaultValue="Choose...">
-							<option>English</option>
-							<option>Hindi</option>
-							<option>Sanskrit</option>
-							<option>Math</option>
-							<option>EVS</option>
-							<option>Social Study</option>
-							<option>Computer</option>
-							<option>Moral</option>
-							<option>G.K</option>
-							<option>Conversation</option>
-							<option>Drawing</option>
-						</Form.Select>
-					</Form.Group>
-
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>First Assessment</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>First Oral</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
-
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>Second Assessment</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
-
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>Second Oral</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
-				</Row>
-
-				<Row className="align-items-center">
-					<Col xs="auto">
+					<Col xs={12}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Subjects</InputGroup.Text>
 							<Form.Select defaultValue="Choose...">
-								<option>English</option>
-								<option>Hindi</option>
-								<option>Sanskrit</option>
-								<option>Math</option>
-								<option>EVS</option>
-								<option>Social Study</option>
-								<option>Computer</option>
-								<option>Moral</option>
-								<option>G.K</option>
-								<option>Conversation</option>
-								<option>Drawing</option>
+								{subjects.map((sub) => (
+									<option>{sub}</option>
+								))}
 							</Form.Select>
 						</InputGroup>
 					</Col>
 
-					<Col xs="auto">
+					{/* Columns start at 100% wide on mobile and bump up to 50% wide on desktop */}
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>FA</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="From A to Z" />
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 80" type="number" />
 						</InputGroup>
 					</Col>
 
-					<Col xs="auto">
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Oral-I</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="From A to Z" />
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
 						</InputGroup>
 					</Col>
 
-					<Col xs="auto">
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>SA</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="From A to Z" />
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 80" type="number" />
 						</InputGroup>
 					</Col>
 
-					<Col xs="auto">
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Oral-II</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="From A to Z" />
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
 						</InputGroup>
 					</Col>
 					<Col xs="auto">
@@ -98,27 +70,21 @@ export const MainForm = () => {
 						</Button>
 					</Col>
 				</Row>
-				<Row className="align-items-center">
-					<Col xs="auto">
+
+				<Row className="mb-3 row_size">
+					<h4>PART-II : CO-SCOLASTIC AREAS</h4>
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Skills</InputGroup.Text>
 							<Form.Select defaultValue="Choose...">
-								<option>Development & Maturity</option>
-								<option>Responsibility</option>
-								<option>Self Confidence</option>
-								<option>Participation in Group Work</option>
-								<option>Neatness</option>
-								<option>Music</option>
-								<option>Discipline</option>
-								<option>Hand Work</option>
-								<option>Attitude towards home work</option>
-								<option>Craft</option>
-								<option>Regularity and punctuality</option>
+								{skills.map((skill) => (
+									<option>{skill}</option>
+								))}
 							</Form.Select>
 						</InputGroup>
 					</Col>
 
-					<Col xs="auto">
+					<Col xs={12} md={6}>
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Grade</InputGroup.Text>
 							<Form.Control id="inlineFormInputGroup" placeholder="From A to Z" />
@@ -133,23 +99,35 @@ export const MainForm = () => {
 
 				<Row className="mb-3 row_size">
 					<h4>PART-III : ATTENDENCE</h4>
-					<Form.Group as={Col} controlId="formGridState">
-						<Form.Label>Term</Form.Label>
-						<Form.Select defaultValue="Choose...">
-							<option>Term-I</option>
-							<option>Term-II</option>
-						</Form.Select>
-					</Form.Group>
+					<Col xs={12}>
+						<InputGroup className="mb-2">
+							<InputGroup.Text>Term</InputGroup.Text>
+							<Form.Select defaultValue="Choose...">
+								<option>Term-I</option>
+								<option>Term-II</option>
+							</Form.Select>
+						</InputGroup>
+					</Col>
 
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>No. of Working Days</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
+					<Col xs={12} md={6}>
+						<InputGroup className="mb-2">
+							<InputGroup.Text>No. of Working Days</InputGroup.Text>
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
+						</InputGroup>
+					</Col>
 
-					<Form.Group as={Col} controlId="formGridCity">
-						<Form.Label>No. of Present Days</Form.Label>
-						<Form.Control type="number" />
-					</Form.Group>
+					<Col xs={12} md={6}>
+						<InputGroup className="mb-2">
+							<InputGroup.Text>No. of Present Days</InputGroup.Text>
+							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
+						</InputGroup>
+					</Col>
+
+					<Col xs="auto">
+						<Button type="submit" className="mb-2">
+							Add
+						</Button>
+					</Col>
 				</Row>
 			</Form>
 		</>

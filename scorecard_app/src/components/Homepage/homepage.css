@@ -17,6 +17,19 @@
     font-weight: 800;
     font-size: 20px;
 }
+
+.sub_heading_div{
+    display: flex;
+    justify-content: space-around;
+}
+
+.edit_logo{
+    /* border: 1px solid red; */
+    /* position: relative;
+    left: 20%; */
+}
+
+
 .attendence_heading{
     font-weight: 700;
     font-size: 20px;

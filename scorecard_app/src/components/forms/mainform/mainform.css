@@ -1,8 +1,4 @@
-.main_form{
-    width: 60%;
-    margin: auto;
-    /* border: 1px solid grey; */
-}
+
 
 .form_heading{
     background-color: rgb(39, 39, 206);
@@ -12,6 +8,7 @@
 }
 
 .row_size{
-    border: 1px solid grey;
-    padding-bottom: 20px;
+    /* border: 1px solid grey; */
+    /* border-radius: 5px;
+    padding-bottom: 20px; */
 }
