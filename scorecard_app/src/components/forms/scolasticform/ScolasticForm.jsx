@@ -41,11 +41,6 @@ export const ScolasticForm = () => {
 	let total = parseInt(values.fa) + parseInt(values.sa) + parseInt(values.f_oral)
 	const handleAddSubject = (e) => {
 		e.preventDefault();
-		// console.log("total-->", total);
-		// setValues({
-		// 	...values,
-		// 	["total_mark"]:total
-		// })
 		dispatch(addSubjectDetails(values))
 		
 	};
@@ -60,6 +55,7 @@ export const ScolasticForm = () => {
 						<InputGroup className="mb-2">
 							<InputGroup.Text>Subjects</InputGroup.Text>
 							<Form.Select aria-label="Default select example"value={values.subject} onChange={handleInputChange} name="subject">
+							<option value="">--Please choose a subject--</option>
 								{subjects.map((sub) => (
 									<option>{sub}</option>
 								))}
