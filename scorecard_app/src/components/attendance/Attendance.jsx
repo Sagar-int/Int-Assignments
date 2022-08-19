@@ -4,13 +4,13 @@ import { useAttendenceData } from '../../hooks/academic';
 export const Attendance = () => {
 	const { isLoading, error, data } = useAttendenceData();
 
-	if (isLoading) {
-		return <h2>Loading..</h2>;
-	}
+	// if (isLoading) {
+	// 	return <h2>Loading..</h2>;
+	// }
 
-	if (error) {
-		return <h2>{error.message}</h2>;
-	}
+	// if (error) {
+	// 	return <h2>{error.message}</h2>;
+	// }
 
 	return (
 		<Table striped bordered hover className="table_border common_width" responsive>

@@ -1,19 +1,9 @@
 import { Table } from 'react-bootstrap';
-import { useGradingscaleData } from '../../hooks/grading';
 import './gradingscale.css';
+import gradedata from "./gscale.json";
 
 export const GradingScale = () => {
-	const { isLoading, error, data } = useGradingscaleData();
-
-	if (isLoading) {
-		return <h2>Loading..</h2>;
-	}
-
-	if (error) {
-		return <h2>{error.message}</h2>;
-	}
-
-
+	
 	return (
 		<div>
 			<Table striped bordered hover className="grading_scale_table table_border">
@@ -25,7 +15,7 @@ export const GradingScale = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{data?.data.map((ele) => {
+					{gradedata.map((ele) => {
 						return (
 							<tr>
 								<td>{ele.range}</td>

@@ -1,9 +1,14 @@
 import { Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { useScolasticsData } from '../../hooks/academic';
 import './scolasticArea.css';
 
 export const ScolasticArea = () => {
 	const { isLoading, error, data } = useScolasticsData();
+	const {part1_data} = useSelector((state) => state.AcademicReducer);
+
+
+
 	let grand_total = 0;
 	for (let i = 0; i < data?.data.length; i++) {
 		grand_total = grand_total + parseInt(data.data[i].total_mark);
@@ -12,13 +17,13 @@ export const ScolasticArea = () => {
 	let Percentage = ((grand_total/2200)*100).toFixed(3)
 	// console.log("grand_total", grand_total, Percentage);
 
-	if (isLoading) {
-		return <h2>Loading..</h2>;
-	}
+	// if (isLoading) {
+	// 	return <h2>Loading..</h2>;
+	// }
 
-	if (error) {
-		return <h2>{error.message}</h2>;
-	}
+	// if (error) {
+	// 	return <h2>{error.message}</h2>;
+	// }
 
 	return (
 		<Table bordered hover className="table_border common_width">
@@ -47,7 +52,7 @@ export const ScolasticArea = () => {
 
 			<tbody>
 
-				{data?.data.map((ele) => {
+				{/* {data?.data.map((ele) => {
 					return (
 						<tr>
 							<td>{ele.id}</td>
@@ -59,7 +64,24 @@ export const ScolasticArea = () => {
 							<td>{ele.total_mark}</td>
 						</tr>
 					);
+				})} */}
+
+
+				{part1_data?.map((ele, i) => {
+					return (
+						<tr>
+							<td>{i+1}</td>
+							<td>{ele.subject}</td>
+							<td>{ele.fa}</td>
+							<td>{ele.f_oral}</td>
+							<td>{ele.sa}</td>
+							<td>{ele.s_oral}</td>
+							<td>{ele.total_mark}</td>
+						</tr>
+					);
 				})}
+
+
 
 				<tr>
 					<td colSpan={2} className="fw-bold text-uppercase">
