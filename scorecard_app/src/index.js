@@ -16,15 +16,15 @@ const queryClient = new QueryClient();
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <DataContextProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <DataContextProvider>
             <App />
-          </PersistGate>
-        </Provider>
-      </DataContextProvider>
-    </QueryClientProvider>
+          </DataContextProvider>
+        </QueryClientProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 
