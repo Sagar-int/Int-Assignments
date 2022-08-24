@@ -1,0 +1,14 @@
+.student_row{
+ 
+    padding-top:30px;
+    padding-bottom:10px;
+}
+
+.student_div{   
+    display: flex;
+    align-items: center;
+}
+
+.student_bold_heading{
+    font-weight: 500;
+}

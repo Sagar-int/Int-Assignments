@@ -1,42 +1,145 @@
+/* eslint-disable no-fallthrough */
+/* eslint-disable default-case */
+
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux/es/exports';
+import * as Yup from 'yup';
+import { Formik, Form as FormikForm } from 'formik';
+import { addAttendenceDetails } from '../../../actions/part3.action';
 
+const initialValues = {
+	term: '',
+	working_days: '',
+	present_days: '',
+};
 export const AttendenceForm = () => {
-  return (
-    <>
-      <Form>
-      <Row className="mb-3 row_size">
-					<h4>PART-III : ATTENDENCE</h4>
-					<Col xs={12}>
-						<InputGroup className="mb-2">
-							<InputGroup.Text>Term</InputGroup.Text>
-							<Form.Select defaultValue="Choose...">
-								<option>Term-I</option>
-								<option>Term-II</option>
-							</Form.Select>
-						</InputGroup>
-					</Col>
+	const dispatch = useDispatch();
 
-					<Col xs={12} md={6}>
-						<InputGroup className="mb-2">
-							<InputGroup.Text>No. of Working Days</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
-						</InputGroup>
-					</Col>
+	const part3ValidationSchema = Yup.object().shape({
+		term: Yup.string().required('Please enter the term *'),
+		working_days: Yup.number().required('Please enter the working_days *'),
+		present_days: Yup.number().required('Please enter the present_days *'),
+	});
 
-					<Col xs={12} md={6}>
-						<InputGroup className="mb-2">
-							<InputGroup.Text>No. of Present Days</InputGroup.Text>
-							<Form.Control id="inlineFormInputGroup" placeholder="Score out of 20" type="number" />
-						</InputGroup>
-					</Col>
+	const handleInputChange = (name, event, setFieldValue) => {
+		const { value } = event.target;
+		switch (name) {
+			case 'term':
+				setFieldValue(name, value);
 
-					<Col xs="auto">
-						<Button type="submit" className="mb-2">
-							Add
-						</Button>
-					</Col>
-				</Row>
-      </Form>
-    </>
-  )
-}
+			case 'working_days':
+				setFieldValue(name, value);
+
+			case 'present_days':
+				setFieldValue(name, value);
+		}
+	};
+
+	const handleAddAttendence = (values, actions) => {
+		let percentage = parseInt(values.present_days) / parseInt(values.working_days)
+		values['percentage'] = percentage*100;
+																																																																		 
+		dispatch(addAttendenceDetails(values));
+		actions.setSubmitting(false);
+		actions.resetForm();        
+	};
+
+	return (
+		<Formik
+			validationSchema={part3ValidationSchema}
+			initialValues={initialValues}
+			onSubmit={handleAddAttendence}
+		>
+			{({ setFieldValue, values, touched, isValid, handleBlur, errors, isSubmitting, actions }) => {
+				return (
+					<FormikForm>
+						<Row className="mb-3 row_size">
+							<h4>PART-III : ATTENDENCE</h4>
+							<Col xs={12}>
+								<InputGroup className="mb-2">
+									<InputGroup.Text>Term</InputGroup.Text>
+
+									<Form.Select
+										aria-label="Default select example"
+										value={values.term}
+										onChange={(e) => handleInputChange('term', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="term"
+										isValid={!errors.term && touched.term}
+										isInvalid={errors.term && touched.term}
+									>
+										<option disabled value="">
+											--Please choose a term--
+										</option>
+										<option>Term-I</option>
+										<option>Term-II</option>
+									</Form.Select>
+
+									{errors.term && touched.term ? (
+										<Form.Control.Feedback type="invalid">{errors.term}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
+								</InputGroup>
+							</Col>
+
+							<Col xs={12} md={6}>
+								<InputGroup className="mb-2">
+									<InputGroup.Text>No. of Working Days</InputGroup.Text>
+									<Form.Control
+										value={values.working_days}
+										onChange={(e) => handleInputChange('working_days', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="working_days"
+										placeholder="must be greater than or equal to present days"
+										id="inlineFormInputGroup"
+										type="number"
+										isValid={!errors.working_days && touched.working_days}
+										isInvalid={errors.working_days && touched.working_days}
+									/>
+									{errors.working_days && touched.working_days ? (
+										<Form.Control.Feedback type="invalid">
+											{errors.working_days}
+										</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Look+s good!</Form.Control.Feedback>
+									)}
+								</InputGroup>
+							</Col>
+
+							<Col xs={12} md={6}>
+								<InputGroup className="mb-2">
+									<InputGroup.Text>No. of Present Days</InputGroup.Text>
+									<Form.Control
+										value={values.present_days}
+										onChange={(e) => handleInputChange('present_days', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="present_days"
+										placeholder="must be less than or equal to working days"
+										id="inlineFormInputGroup"
+										type="number"
+										isValid={!errors.present_days && touched.present_days}
+										isInvalid={errors.present_days && touched.present_days}
+									/>
+									{errors.present_days && touched.working_days ? (
+										<Form.Control.Feedback type="invalid">
+											{errors.present_days}
+										</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Look+s good!</Form.Control.Feedback>
+									)}
+								</InputGroup>
+							</Col>
+
+							<Col xs="auto">
+								<Button type="submit" className="mb-2" disabled={isSubmitting}>
+									{isSubmitting ? 'Adding' : 'Add'}
+								</Button>
+							</Col>
+						</Row>
+					</FormikForm>
+				);
+			}}
+		</Formik>
+	);
+};

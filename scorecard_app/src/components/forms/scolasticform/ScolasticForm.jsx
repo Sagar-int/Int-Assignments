@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
+/* eslint-disable no-fallthrough */
+/* eslint-disable default-case */
+
+import { useDispatch } from 'react-redux/es/exports';
 import { Button, Col, InputGroup, Row, Form } from 'react-bootstrap';
 import { addSubjectDetails } from '../../../actions/part1.action';
 import * as Yup from 'yup';
@@ -30,25 +31,25 @@ export const ScolasticForm = () => {
 	];
 
 	const dispatch = useDispatch();
-	const { part1_data } = useSelector((state) => state.AcademicReducer);
+	// const { part1_data } = useSelector((state) => state.AcademicReducer);
 
 	const part1ValidationSchema = Yup.object().shape({
 		subject: Yup.string().required('Please enter the Subject'),
 		fa: Yup.number()
 			.min(0, 'minimum 0 score must be enter')
-			.max(80, 'maximum 80 score must be enter')
+			.max(80, 'score must be less than 80')
 			.required('Please enter the score'),
 		f_oral: Yup.number()
 			.min(0, 'minimum 0 score must be enter')
-			.max(20, 'maximum 20 score must be enter')
+			.max(20, 'score must be less than 20')
 			.required('Please enter the score'),
 		sa: Yup.number()
 			.min(0, 'minimum 0 score must be enter')
-			.max(80, 'maximum 80 score must be enter')
+			.max(80, 'score must be less than 80')
 			.required('Please enter the score'),
 		s_oral: Yup.number()
 			.min(0, 'minimum 0 score must be enter')
-			.max(20, 'maximum 20 score must be enter')
+			.max(20, 'score must be less than 20')
 			.required('Please enter the score'),
 	});
 
@@ -57,30 +58,41 @@ export const ScolasticForm = () => {
 		switch (name) {
 			case 'subject':
 				setFieldValue(name, value);
+
 			case 'fa':
 				setFieldValue(name, value);
+
 			case 'f_oral':
 				setFieldValue(name, value);
+
 			case 'sa':
 				setFieldValue(name, value);
+
 			case 's_oral':
 				setFieldValue(name, value);
 		}
 	};
 
-	// let total = parseInt(values.fa) + parseInt(values.sa) + parseInt(values.f_oral);
+	const handleAddSubject = (values, actions) => {
+		let sum =
+			parseInt(values.fa) + parseInt(values.f_oral) + parseInt(values.sa) + parseInt(values.s_oral);
+		values['total_mark'] = sum;
 
-	const handleAddSubject = (e, values, actions) => {
-		e.preventDefault();
-		console.log({ values });
 		dispatch(addSubjectDetails(values));
-		// actions.isSubmitting(false);
+		actions.setSubmitting(false);
+		actions.resetForm();
+		// console.log( 'Values-->',values,'Total_mark-->', sum , actions);
 	};
 
 	return (
-		<Formik validationSchema={part1ValidationSchema} initialValues={initialValues} onSubmit={handleAddSubject}>
-			{({ setFieldValue, values, touched, isValid, errors, isSubmitting, actions }) => {
-				console.log({ errors, values });
+		<Formik
+			validationSchema={part1ValidationSchema}
+			initialValues={initialValues}
+			onSubmit={handleAddSubject}
+		>
+			{({ setFieldValue, values, touched, handleBlur, isValid, errors, isSubmitting, actions }) => {
+				console.log(errors.fa, touched.fa);
+
 				return (
 					<FormikForm>
 						<Row className="mb-3 row_size">
@@ -92,8 +104,10 @@ export const ScolasticForm = () => {
 										aria-label="Default select example"
 										value={values.subject}
 										onChange={(e) => handleInputChange('subject', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
 										name="subject"
-										isInvalid={!!errors.subject}
+										isValid={!errors.subject && touched.subject}
+										isInvalid={errors.subject && touched.subject}
 									>
 										<option disabled value="">
 											--Please choose a subject--
@@ -102,7 +116,11 @@ export const ScolasticForm = () => {
 											<option>{sub}</option>
 										))}
 									</Form.Select>
-									<Form.Control.Feedback type="invalid">{errors.subject}</Form.Control.Feedback>
+									{errors.subject && touched.subject ? (
+										<Form.Control.Feedback type="invalid">{errors.subject}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
 								</InputGroup>
 							</Col>
 
@@ -113,13 +131,19 @@ export const ScolasticForm = () => {
 									<Form.Control
 										value={values.fa}
 										onChange={(e) => handleInputChange('fa', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
 										name="fa"
 										id="inlineFormInputGroup"
 										placeholder="Score out of 80"
 										type="number"
-										isInvalid={!!errors.fa}
+										isValid={!errors.fa && touched.fa}
+										isInvalid={errors.fa && touched.fa}
 									/>
-									<Form.Control.Feedback type="invalid">{errors.fa}</Form.Control.Feedback>
+									{errors.fa && touched.fa ? (
+										<Form.Control.Feedback type="invalid">{errors.fa}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
 								</InputGroup>
 							</Col>
 
@@ -129,13 +153,19 @@ export const ScolasticForm = () => {
 									<Form.Control
 										value={values.f_oral}
 										onChange={(e) => handleInputChange('f_oral', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
 										name="f_oral"
 										id="inlineFormInputGroup"
 										placeholder="Score out of 20"
 										type="number"
-										isInvalid={!!errors.f_oral}
+										isValid={!errors.f_oral && touched.f_oral}
+										isInvalid={errors.f_oral && touched.f_oral}
 									/>
-									<Form.Control.Feedback type="invalid">{errors.f_oral}</Form.Control.Feedback>
+									{errors.f_oral && touched.f_oral ? (
+										<Form.Control.Feedback type="invalid">{errors.f_oral}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
 								</InputGroup>
 							</Col>
 
@@ -145,13 +175,19 @@ export const ScolasticForm = () => {
 									<Form.Control
 										value={values.sa}
 										onChange={(e) => handleInputChange('sa', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
 										name="sa"
 										id="inlineFormInputGroup"
 										placeholder="Score out of 80"
 										type="number"
-										isInvalid={!!errors.sa}
+										isValid={!errors.sa && touched.sa}
+										isInvalid={errors.sa && touched.sa}
 									/>
-									<Form.Control.Feedback type="invalid">{errors.sa}</Form.Control.Feedback>
+									{errors.sa && touched.sa ? (
+										<Form.Control.Feedback type="invalid">{errors.sa}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
 								</InputGroup>
 							</Col>
 
@@ -161,13 +197,19 @@ export const ScolasticForm = () => {
 									<Form.Control
 										value={values.s_oral}
 										onChange={(e) => handleInputChange('s_oral', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
 										name="s_oral"
 										id="inlineFormInputGroup"
 										placeholder="Score out of 20"
 										type="number"
-										isInvalid={!!errors.s_oral}
+										isValid={!errors.s_oral && touched.s_oral}
+										isInvalid={errors.s_oral && touched.s_oral}
 									/>
-									<Form.Control.Feedback type="invalid">{errors.s_oral}</Form.Control.Feedback>
+									{errors.s_oral && touched.s_oral ? (
+										<Form.Control.Feedback type="invalid">{errors.s_oral}</Form.Control.Feedback>
+									) : (
+										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+									)}
 								</InputGroup>
 							</Col>
 

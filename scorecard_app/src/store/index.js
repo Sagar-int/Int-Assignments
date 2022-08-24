@@ -6,13 +6,15 @@ import reducers from '../reducers/index';
 
 const persistConfig = {
     key: 'root',
-    storage,
+    //version: 0,     // let assign the current version to 0
+    //debug: true,    // debug persistor
+    storage:storage
+    //stateReconciler: autoMergeLevel2
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 const store = createStore(persistedReducer)
 let persistor = persistStore(store)
 
-console.log("persistor-->",persistor.getState());
 
 export { store, persistor };

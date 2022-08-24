@@ -5,6 +5,7 @@ import { DataContext } from '../../contexts/DataContext';
 import { AttendenceForm } from '../forms/attendence/AttendenceForm';
 import { CoScolasticForm } from '../forms/coscalasticform/CoScolasticForm';
 import { ScolasticForm } from '../forms/scolasticform/ScolasticForm';
+import { StudentForm } from '../forms/studentform/StudentForm';
 
 export const CustomModal = ({ ChildForm }) => {
 	const { show, handleClose, handleShow } = useContext(DataContext);
@@ -23,6 +24,10 @@ export const CustomModal = ({ ChildForm }) => {
 				) : ChildForm === 'attendence' ? (
 					<Modal.Body>
 						<AttendenceForm />
+					</Modal.Body>
+				) : ChildForm === 'student' ? (
+					<Modal.Body>
+						<StudentForm/>
 					</Modal.Body>
 				) : null}
 

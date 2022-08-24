@@ -1,10 +1,10 @@
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux/es/exports';
 import { useScolasticsData } from '../../hooks/academic';
 import './scolasticArea.css';
 
 export const ScolasticArea = () => {
-	const { isLoading, error, data } = useScolasticsData();
+	const { isLoading, error, data } = useScolasticsData(); //data from json server
 	const {part1_data} = useSelector((state) => state.AcademicReducer);
 
 
@@ -26,7 +26,7 @@ export const ScolasticArea = () => {
 	// }
 
 	return (
-		<Table bordered hover className="table_border common_width">
+		<Table bordered hover className="table_border common_width" responsive="xs">
 			<thead>
 				<tr>
 					<th className="table_head" rowspan={2}>

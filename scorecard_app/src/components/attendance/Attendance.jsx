@@ -1,16 +1,12 @@
 import { Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux/es/exports';
 import { useAttendenceData } from '../../hooks/academic';
 
 export const Attendance = () => {
 	const { isLoading, error, data } = useAttendenceData();
+	const {part3_data} = useSelector((state) => state.AcademicReducer);
 
-	// if (isLoading) {
-	// 	return <h2>Loading..</h2>;
-	// }
-
-	// if (error) {
-	// 	return <h2>{error.message}</h2>;
-	// }
+	
 
 	return (
 		<Table striped bordered hover className="table_border common_width" responsive>
@@ -23,13 +19,23 @@ export const Attendance = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{data?.data.map((ele) => {
+				{/* {data?.data.map((ele) => {
 					return (
 						<tr>
 							<td>{ele.term}</td>
 							<td>{ele.working_days}</td>
 							<td>{ele.present_days}</td>
 							<td>{ele.percentage}</td>
+						</tr>
+					);
+				})} */}
+				{part3_data?.map((ele) => {
+					return (
+						<tr>
+							<td>{ele.term}</td>
+							<td>{ele.working_days}</td>
+							<td>{ele.present_days}</td>
+							<td>{ele.percentage}%</td>
 						</tr>
 					);
 				})}
