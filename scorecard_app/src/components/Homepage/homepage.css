@@ -20,13 +20,7 @@
 
 .sub_heading_div{
     display: flex;
-    justify-content: space-around;
-}
-
-.edit_logo{
-    /* border: 1px solid red; */
-    /* position: relative;
-    left: 20%; */
+    justify-content: space-evenly;
 }
 
 
@@ -46,7 +40,6 @@
     border-bottom: 2px solid black;
     border-top: 2px solid black;
     margin-top: 10px;
-    /* display: flex; */
 }
 
 .part1_div{

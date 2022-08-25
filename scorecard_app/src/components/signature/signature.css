@@ -27,3 +27,14 @@
 .principal_sign{
     margin-top: 110px;
 }
+
+.remark_row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.all_sign_row{
+    display: flex;
+    justify-content: space-between;
+}
+

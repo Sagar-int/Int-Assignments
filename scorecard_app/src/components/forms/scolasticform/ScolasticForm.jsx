@@ -6,6 +6,7 @@ import { Button, Col, InputGroup, Row, Form } from 'react-bootstrap';
 import { addSubjectDetails } from '../../../actions/part1.action';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
+import { useState } from 'react';
 
 const initialValues = {
 	subject: '',
@@ -16,7 +17,7 @@ const initialValues = {
 };
 
 export const ScolasticForm = () => {
-	let subjects = [
+	const [subjects, setSubjects] = useState([
 		'English',
 		'Hindi',
 		'Sanskrit',
@@ -28,7 +29,7 @@ export const ScolasticForm = () => {
 		'G.K',
 		'Conversation',
 		'Drawing',
-	];
+	]);
 
 	const dispatch = useDispatch();
 	// const { part1_data } = useSelector((state) => state.AcademicReducer);
@@ -36,18 +37,22 @@ export const ScolasticForm = () => {
 	const part1ValidationSchema = Yup.object().shape({
 		subject: Yup.string().required('Please enter the Subject'),
 		fa: Yup.number()
+			.integer()
 			.min(0, 'minimum 0 score must be enter')
 			.max(80, 'score must be less than 80')
 			.required('Please enter the score'),
 		f_oral: Yup.number()
+			.integer()
 			.min(0, 'minimum 0 score must be enter')
 			.max(20, 'score must be less than 20')
 			.required('Please enter the score'),
 		sa: Yup.number()
+			.integer()
 			.min(0, 'minimum 0 score must be enter')
 			.max(80, 'score must be less than 80')
 			.required('Please enter the score'),
 		s_oral: Yup.number()
+			.integer()
 			.min(0, 'minimum 0 score must be enter')
 			.max(20, 'score must be less than 20')
 			.required('Please enter the score'),
@@ -81,7 +86,11 @@ export const ScolasticForm = () => {
 		dispatch(addSubjectDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
-		// console.log( 'Values-->',values,'Total_mark-->', sum , actions);
+
+		const filter = subjects.filter((ele) => ele !== values.subject);
+		setSubjects(filter);
+		alert(`${values.subject} subject added successfully`)
+		// console.log( 'Values-->',values,'filtered_subject-->', filter);
 	};
 
 	return (

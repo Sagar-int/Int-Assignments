@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { addAttendenceDetails } from '../../../actions/part3.action';
+import { useState } from 'react';
 
 const initialValues = {
 	term: '',
@@ -15,10 +16,30 @@ const initialValues = {
 export const AttendenceForm = () => {
 	const dispatch = useDispatch();
 
+	const [terms, setTerms] = useState(['Term-I', 'Term-II']);
+	const [workingDay, setWorkingDay] = useState(0);
+	const [presentDay, setPresentDay] = useState(0);
+
+	console.log('workingDay==>', workingDay);
+
 	const part3ValidationSchema = Yup.object().shape({
 		term: Yup.string().required('Please enter the term *'),
-		working_days: Yup.number().required('Please enter the working_days *'),
-		present_days: Yup.number().required('Please enter the present_days *'),
+		working_days: Yup.number()
+			.integer()
+			.test(
+				'working_days',
+				'working_days must be greater than present days',
+				(value) => value > presentDay
+			)
+			.required('Please enter the working days *'),
+		present_days: Yup.number()
+			.integer()
+			.test(
+				'present_days',
+				'present days must be less than working days',
+				(value) => value < workingDay
+			)
+			.required('Please enter the present_days *'),
 	});
 
 	const handleInputChange = (name, event, setFieldValue) => {
@@ -29,6 +50,7 @@ export const AttendenceForm = () => {
 
 			case 'working_days':
 				setFieldValue(name, value);
+				setWorkingDay(value);
 
 			case 'present_days':
 				setFieldValue(name, value);
@@ -36,12 +58,17 @@ export const AttendenceForm = () => {
 	};
 
 	const handleAddAttendence = (values, actions) => {
-		let percentage = parseInt(values.present_days) / parseInt(values.working_days)
-		values['percentage'] = percentage*100;
-																																																																		 
+		let percentage = parseInt(values.present_days) / parseInt(values.working_days);
+		values['percentage'] = percentage * 100;
+
 		dispatch(addAttendenceDetails(values));
 		actions.setSubmitting(false);
-		actions.resetForm();        
+		actions.resetForm();
+
+		const filter = terms.filter((ele) => ele !== values.term);
+		setTerms(filter);
+		setWorkingDay(0);
+		setPresentDay(0);
 	};
 
 	return (
@@ -71,8 +98,9 @@ export const AttendenceForm = () => {
 										<option disabled value="">
 											--Please choose a term--
 										</option>
-										<option>Term-I</option>
-										<option>Term-II</option>
+										{terms.map((term) => (
+											<option>{term}</option>
+										))}
 									</Form.Select>
 
 									{errors.term && touched.term ? (

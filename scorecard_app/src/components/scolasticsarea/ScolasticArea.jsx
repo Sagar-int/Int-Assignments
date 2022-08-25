@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux/es/exports';
 import { useScolasticsData } from '../../hooks/academic';
@@ -8,25 +9,18 @@ export const ScolasticArea = () => {
 	const {part1_data} = useSelector((state) => state.AcademicReducer);
 
 
-
 	let grand_total = 0;
-	for (let i = 0; i < data?.data.length; i++) {
-		grand_total = grand_total + parseInt(data.data[i].total_mark);
+	for (let i = 0; i < part1_data?.length; i++) {
+		grand_total = grand_total + parseInt(part1_data[i].total_mark);
 	}
 
-	let Percentage = ((grand_total/2200)*100).toFixed(3)
-	// console.log("grand_total", grand_total, Percentage);
+	let Total = part1_data.length*200;
+	let Percentage = ((grand_total/Total)*100).toFixed(3)
 
-	// if (isLoading) {
-	// 	return <h2>Loading..</h2>;
-	// }
-
-	// if (error) {
-	// 	return <h2>{error.message}</h2>;
-	// }
+	// console.log("grand_total-->", grand_total ,"and", "Total-->", Total);
 
 	return (
-		<Table bordered hover className="table_border common_width" responsive="xs">
+		<Table bordered hover className="table_border common_width" size="sm" responsive="xs">
 			<thead>
 				<tr>
 					<th className="table_head" rowspan={2}>
@@ -87,19 +81,19 @@ export const ScolasticArea = () => {
 					<td colSpan={2} className="fw-bold text-uppercase">
 						Grand Total
 					</td>
-					<td colSpan={5}>{grand_total}</td>
+					<td colSpan={5}>{grand_total? grand_total: null}</td>
 				</tr>
 				<tr>
 					<td colSpan={2} className="fw-bold text-uppercase">
 						Percentage
 					</td>
-					<td colSpan={5}>{Percentage}</td>
+					<td colSpan={5}>{grand_total? Percentage: null}</td>
 				</tr>
 				<tr>
 					<td colSpan={2} className="fw-bold text-uppercase">
 						Rank
 					</td>
-					<td colSpan={5}>V</td>
+					<td colSpan={5}>{null}</td>
 				</tr>
 			</tbody>
 		</Table>

@@ -8,7 +8,7 @@ import { ScolasticForm } from '../forms/scolasticform/ScolasticForm';
 import { StudentForm } from '../forms/studentform/StudentForm';
 
 export const CustomModal = ({ ChildForm }) => {
-	const { show, handleClose, handleShow } = useContext(DataContext);
+	const { show, handleClose } = useContext(DataContext);
 
 	return (
 		<>
@@ -34,9 +34,6 @@ export const CustomModal = ({ ChildForm }) => {
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
 						Close
-					</Button>
-					<Button variant="primary" onClick={handleClose}>
-						Save Changes
 					</Button>
 				</Modal.Footer>
 			</Modal>

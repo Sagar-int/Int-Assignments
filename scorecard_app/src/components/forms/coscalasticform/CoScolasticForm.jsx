@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { addSkillDetails } from '../../../actions/part2.action';
-
+import { useState } from 'react';
 
 const initialValues = {
 	skill: '',
@@ -15,8 +15,7 @@ const initialValues = {
 export const CoScolasticForm = () => {
 	const dispatch = useDispatch();
 
-
-	let skills = [
+	const [skills, setSkills] = useState([
 		'Development & Maturity',
 		'Responsibility',
 		'Self Confidence',
@@ -28,7 +27,9 @@ export const CoScolasticForm = () => {
 		'Attitude towards home work',
 		'Craft',
 		'Regularity and punctuality',
-	];
+	]);
+
+	const [grade, setGrade] = useState(['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D']);
 
 	const part2ValidationSchema = Yup.object().shape({
 		skill: Yup.string().required('Please enter the Skill'),
@@ -50,6 +51,10 @@ export const CoScolasticForm = () => {
 		dispatch(addSkillDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
+
+		const filter = skills.filter((ele) => ele !== values.skill);
+		setSkills(filter);
+		alert(`${values.skill} skill added successfully`)
 	};
 
 	return (
@@ -94,17 +99,23 @@ export const CoScolasticForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>Grade</InputGroup.Text>
-									<Form.Control
+									<Form.Select
+										aria-label="Default select example"
 										value={values.grade}
 										onChange={(e) => handleInputChange('grade', e, setFieldValue)}
 										onBlur={handleBlur} // This apparently updates `touched`
 										name="grade"
-										id="inlineFormInputGroup"
-										placeholder="Please refer the below grading table *"
-										type="text"
 										isValid={!errors.grade && touched.grade}
 										isInvalid={errors.grade && touched.grade}
-									/>
+									>
+										<option disabled value="">
+											--Please choose a skill--
+										</option>
+										{grade.map((skill) => (
+											<option>{skill}</option>
+										))}
+									</Form.Select>
+
 									{errors.grade && touched.grade ? (
 										<Form.Control.Feedback type="invalid">{errors.grade}</Form.Control.Feedback>
 									) : (

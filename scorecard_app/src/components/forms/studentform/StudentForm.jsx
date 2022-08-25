@@ -65,6 +65,7 @@ export const StudentForm = () => {
 		console.log("Student_Values-->", values);
 		actions.setSubmitting(false);
 		actions.resetForm();
+		alert(`Students details successfully added`)
 	};
 
 	return (
