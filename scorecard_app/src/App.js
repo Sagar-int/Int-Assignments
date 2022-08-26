@@ -16,15 +16,20 @@ function App() {
 
   const { handleEditButton, editFlag,  } = useContext(DataContext);
   const {student_data} = useSelector((state) => state.AcademicReducer);
-  const {name, roll_no} = student_data;
+  
 
   const generatePDF = () => {
     const source = document.getElementById("homepageId");
-    const fileName = `${roll_no}.pdf`;
-    html2pdf()
-    .set({ html2canvas: { scale: 4 } })
-    .from(source)
-    .save(fileName);
+    const fileName = student_data.roll_no ? `${student_data.roll_no}.pdf`: "xyz.pdf";
+    var opt = {
+      margin:       0.2,
+      filename:     fileName,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 8 },
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(source).save();
   };
 
   const componentRef = useRef();
