@@ -1,7 +1,7 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { addSkillDetails } from '../../../actions/part2.action';
@@ -13,6 +13,8 @@ const initialValues = {
 };
 
 export const CoScolasticForm = () => {
+	const { part2_data } = useSelector((state) => state.AcademicReducer);
+	const selectedSkills = part2_data.map((ele) => ele.skill);
 	const dispatch = useDispatch();
 
 	const [skills, setSkills] = useState([
@@ -54,7 +56,7 @@ export const CoScolasticForm = () => {
 
 		const filter = skills.filter((ele) => ele !== values.skill);
 		setSkills(filter);
-		alert(`${values.skill} skill added successfully`)
+		alert(`${values.skill} skill added successfully`);
 	};
 
 	return (
@@ -83,9 +85,9 @@ export const CoScolasticForm = () => {
 										<option disabled value="">
 											--Please choose a skill--
 										</option>
-										{skills.map((skill) => (
-											<option>{skill}</option>
-										))}
+										{skills.map((skill, i) => {
+											return !selectedSkills.includes(skill) && <option key={i}>{skill}</option>;
+										})}
 									</Form.Select>
 
 									{errors.skill && touched.skill ? (

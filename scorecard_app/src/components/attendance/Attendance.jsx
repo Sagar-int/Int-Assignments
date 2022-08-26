@@ -1,9 +1,9 @@
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux/es/exports';
-import { useAttendenceData } from '../../hooks/academic';
+// import { useAttendenceData } from '../../hooks/academic';
 
 export const Attendance = () => {
-	const { isLoading, error, data } = useAttendenceData();
+	// const { isLoading, error, data } = useAttendenceData();
 	const {part3_data} = useSelector((state) => state.AcademicReducer);
 
 	

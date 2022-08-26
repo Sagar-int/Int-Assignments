@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux/es/exports';
-import { useScolasticsData } from '../../hooks/academic';
+// import { useScolasticsData } from '../../hooks/academic';
 import './scolasticArea.css';
 
 export const ScolasticArea = () => {
-	const { isLoading, error, data } = useScolasticsData(); //data from json server
+	// const { isLoading, error, data } = useScolasticsData();
+	 //data from json server
 	const {part1_data} = useSelector((state) => state.AcademicReducer);
 
 

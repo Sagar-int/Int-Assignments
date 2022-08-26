@@ -2,7 +2,7 @@
 /* eslint-disable default-case */
 
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { addAttendenceDetails } from '../../../actions/part3.action';
@@ -14,6 +14,9 @@ const initialValues = {
 	present_days: '',
 };
 export const AttendenceForm = () => {
+
+	const { part3_data } = useSelector((state) => state.AcademicReducer);
+	const selectedTerms = part3_data.map((ele) => ele.term);
 	const dispatch = useDispatch();
 
 	const [terms, setTerms] = useState(['Term-I', 'Term-II']);
@@ -98,9 +101,9 @@ export const AttendenceForm = () => {
 										<option disabled value="">
 											--Please choose a term--
 										</option>
-										{terms.map((term) => (
-											<option>{term}</option>
-										))}
+										{terms.map((term, i) => {
+											return !selectedTerms.includes(term) && <option key={i}>{term}</option>;
+										})}
 									</Form.Select>
 
 									{errors.term && touched.term ? (

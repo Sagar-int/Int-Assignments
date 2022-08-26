@@ -1,12 +1,12 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
 
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { Button, Col, InputGroup, Row, Form } from 'react-bootstrap';
 import { addSubjectDetails } from '../../../actions/part1.action';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const initialValues = {
 	subject: '',
@@ -17,6 +17,11 @@ const initialValues = {
 };
 
 export const ScolasticForm = () => {
+	const { part1_data } = useSelector((state) => state.AcademicReducer);
+	const selectedSubjects = part1_data.map((ele) => ele.subject);
+
+	const dispatch = useDispatch();
+
 	const [subjects, setSubjects] = useState([
 		'English',
 		'Hindi',
@@ -31,8 +36,7 @@ export const ScolasticForm = () => {
 		'Drawing',
 	]);
 
-	const dispatch = useDispatch();
-	// const { part1_data } = useSelector((state) => state.AcademicReducer);
+	
 
 	const part1ValidationSchema = Yup.object().shape({
 		subject: Yup.string().required('Please enter the Subject'),
@@ -86,11 +90,7 @@ export const ScolasticForm = () => {
 		dispatch(addSubjectDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
-
-		const filter = subjects.filter((ele) => ele !== values.subject);
-		setSubjects(filter);
-		alert(`${values.subject} subject added successfully`)
-		// console.log( 'Values-->',values,'filtered_subject-->', filter);
+		alert(`${values.subject} subject added successfully`);
 	};
 
 	return (
@@ -121,9 +121,9 @@ export const ScolasticForm = () => {
 										<option disabled value="">
 											--Please choose a subject--
 										</option>
-										{subjects.map((sub) => (
-											<option>{sub}</option>
-										))}
+										{subjects.map((sub, i) => {
+											return !selectedSubjects.includes(sub) && <option key={i}>{sub}</option>;
+										})}
 									</Form.Select>
 									{errors.subject && touched.subject ? (
 										<Form.Control.Feedback type="invalid">{errors.subject}</Form.Control.Feedback>

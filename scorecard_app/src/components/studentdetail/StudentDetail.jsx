@@ -5,7 +5,6 @@ export const StudentDetail = () => {
 
 	const {student_data} = useSelector((state) => state.AcademicReducer);
 
-	console.log("student_data-->", student_data);
 
 	return (
 		<Container>

@@ -34,7 +34,7 @@ export const HomePage = React.forwardRef((props, ref) => {
 	const {handleShow, child, handleEditButton, editFlag } = useContext(DataContext);
 
 	return (
-		<Container fluid="md" className="main_container" ref={ref} style={{pageStyle}}>
+		<Container id='homepageId' fluid="md" className="main_container" ref={ref} style={{pageStyle}}>
 			<Row onClick={() => handleEditButton(true)}>
 				<Col className="Top_heading">First Term Examination 2018-19</Col>
 			</Row>
@@ -160,7 +160,7 @@ export const HomePage = React.forwardRef((props, ref) => {
 					{/* Button to Add the Attendence details */}
 					{
 						editFlag?
-						<Button
+						<Button																																																					
 						variant="primary"
 						size="sm"
 						className="edit_logo"
