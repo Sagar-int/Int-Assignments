@@ -4,8 +4,9 @@ import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
-import { addSkillDetails } from '../../../actions/part2.action';
-import { useState } from 'react';
+import { addSkillDetails, editSkillDetails } from '../../../actions/part2.action';
+import { useContext, useState } from 'react';
+import { DataContext } from '../../../contexts/DataContext';
 
 const initialValues = {
 	skill: '',
@@ -13,6 +14,7 @@ const initialValues = {
 };
 
 export const CoScolasticForm = () => {
+	const { editRow, id } = useContext(DataContext);
 	const { part2_data } = useSelector((state) => state.AcademicReducer);
 	const selectedSkills = part2_data.map((ele) => ele.skill);
 	const dispatch = useDispatch();
@@ -31,7 +33,7 @@ export const CoScolasticForm = () => {
 		'Regularity and punctuality',
 	]);
 
-	const [grade, setGrade] = useState(['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D']);
+	const grade = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D'];
 
 	const part2ValidationSchema = Yup.object().shape({
 		skill: Yup.string().required('Please enter the Skill'),
@@ -53,17 +55,21 @@ export const CoScolasticForm = () => {
 		dispatch(addSkillDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
-
-		const filter = skills.filter((ele) => ele !== values.skill);
-		setSkills(filter);
 		alert(`${values.skill} skill added successfully`);
+	};
+
+	const handleEditSkill = (values, actions) => {
+		dispatch(editSkillDetails(values, id));
+		actions.setSubmitting(false);
+		actions.resetForm();
+		alert(`${values.skill} skill edited successfully`);
 	};
 
 	return (
 		<Formik
 			validationSchema={part2ValidationSchema}
 			initialValues={initialValues}
-			onSubmit={handleAddSkill}
+			onSubmit={editRow ? handleAddSkill : handleEditSkill}
 		>
 			{({ setFieldValue, values, touched, isValid, handleBlur, errors, isSubmitting, actions }) => {
 				return (
@@ -82,12 +88,26 @@ export const CoScolasticForm = () => {
 										isValid={!errors.skill && touched.skill}
 										isInvalid={errors.skill && touched.skill}
 									>
-										<option disabled value="">
-											--Please choose a skill--
-										</option>
-										{skills.map((skill, i) => {
-											return !selectedSkills.includes(skill) && <option key={i}>{skill}</option>;
-										})}
+									
+										{editRow ? (
+											<option disabled value="">
+												--Please choose a skill--
+											</option>
+										) : (
+											<option selected hidden value={part2_data[id].skill}>
+												{part2_data[id].skill}
+											</option>
+										)}
+
+										{editRow
+											? skills.map((skill, i) => {
+													return (
+														!selectedSkills.includes(skill) && <option key={i}>{skill}</option>
+													);
+											  })
+											: skills.map((skill, i) => {
+													return <option key={i}>{skill}</option>;
+											  })}
 									</Form.Select>
 
 									{errors.skill && touched.skill ? (
@@ -110,9 +130,19 @@ export const CoScolasticForm = () => {
 										isValid={!errors.grade && touched.grade}
 										isInvalid={errors.grade && touched.grade}
 									>
-										<option disabled value="">
-											--Please choose a skill--
-										</option>
+										{/* <option disabled value="">
+											--Please choose a grade--
+										</option> */}
+
+										{editRow ? (
+											<option disabled value="">
+												--Please choose a grade--
+											</option>
+										) : (
+											<option selected hidden value={part2_data[id].skill}>
+												{part2_data[id].grade}
+											</option>
+										)}
 										{grade.map((skill) => (
 											<option>{skill}</option>
 										))}
@@ -126,9 +156,15 @@ export const CoScolasticForm = () => {
 								</InputGroup>
 							</Col>
 							<Col xs="auto">
-								<Button type="submit" className="mb-2" disabled={isSubmitting}>
-									{isSubmitting ? 'Adding' : 'Add'}
-								</Button>
+								{editRow ? (
+									<Button type="submit" className="mb-2" disabled={isSubmitting}>
+										{isSubmitting ? 'Adding' : 'Add'}
+									</Button>
+								) : (
+									<Button type="submit" className="mb-2" disabled={isSubmitting}>
+										{isSubmitting ? 'editing' : 'edit'}
+									</Button>
+								)}
 							</Col>
 						</Row>
 					</FormikForm>

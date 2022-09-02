@@ -1,12 +1,13 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { addStudentDetails } from '../../../actions/student.action';
+import { addStudentDetails, editStudentDetails } from '../../../actions/student.action';
+import { DataContext } from '../../../contexts/DataContext';
 
 const initialValues = {
 	name: '',
@@ -17,6 +18,7 @@ const initialValues = {
 };
 
 export const StudentForm = () => {
+	const { editRow, id } = useContext(DataContext);
 	const dispatch = useDispatch();
 	// const { part1_data } = useSelector((state) => state.AcademicReducer);
 
@@ -62,17 +64,23 @@ export const StudentForm = () => {
 
 	const handleAddStudent = (values, actions) => {
 		dispatch(addStudentDetails(values));
-		console.log("Student_Values-->", values);
 		actions.setSubmitting(false);
 		actions.resetForm();
-		alert(`Students details successfully added`)
+		alert(`Students details successfully added`);
+	};
+
+	const handleEditStudent = (values, actions) => {
+		dispatch(editStudentDetails(values, id));
+		actions.setSubmitting(false);
+		actions.resetForm();
+		alert(`Students details successfully Edited`);
 	};
 
 	return (
 		<Formik
 			initialValues={initialValues}
 			validationSchema={studentDetailSchema}
-			onSubmit={handleAddStudent}
+			onSubmit={editRow ? handleAddStudent : handleEditStudent}
 		>
 			{({ setFieldValue, values, touched, handleBlur, isValid, errors, isSubmitting, actions }) => {
 				return (
@@ -193,9 +201,15 @@ export const StudentForm = () => {
 							</Col>
 						</Row>
 
-						<Button type="submit" className="mb-2" disabled={isSubmitting}>
-							{isSubmitting ? 'Adding' : 'Add'}
-						</Button>
+						{editRow ? (
+							<Button type="submit" className="mb-2" disabled={isSubmitting}>
+								{isSubmitting ? 'Adding' : 'Add'}
+							</Button>
+						) : (
+							<Button type="submit" className="mb-2" disabled={isSubmitting}>
+								{isSubmitting ? 'editing' : 'edit'}
+							</Button>
+						)}
 					</FormikForm>
 				);
 			}}

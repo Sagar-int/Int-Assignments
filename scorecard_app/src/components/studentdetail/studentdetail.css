@@ -11,3 +11,8 @@
 .student_bold_heading{
     font-weight: 500;
 }
+
+.edit_student{
+    position: relative;
+    right: 42%;
+}
