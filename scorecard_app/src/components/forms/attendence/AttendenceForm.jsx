@@ -31,8 +31,8 @@ export const AttendenceForm = () => {
 			.integer()
 			.test(
 				'working_days',
-				'working_days must be greater than present days',
-				(value) => value > presentDay
+				'working_days must be greater than or equal to present days',
+				(value) => value >= presentDay
 			)
 			.test('Is positive?', 'ERROR: The number must be greater than 0!', (value) => value > 0)
 			.required('Please enter the working days *'),
@@ -41,8 +41,8 @@ export const AttendenceForm = () => {
 			.integer()
 			.test(
 				'present_days',
-				'present days must be less than working days',
-				(value) => value < workingDay
+				'present days must be less than or equal to working days',
+				(value) => value <= workingDay
 			)
 			.test('Is positive?', 'ERROR: The number must be greater than 0!', (value) => value > 0)
 			.required('Please enter the present_days *'),

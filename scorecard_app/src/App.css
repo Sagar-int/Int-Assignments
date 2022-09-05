@@ -8,6 +8,12 @@
     text-align: center;
 }
 
+.footer-center{
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 .print_download_btn_div{
     display: flex;
     justify-content: space-between;

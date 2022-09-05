@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux/es/exports';
 import { DataContext } from '../../contexts/DataContext';
 import { Attendance } from '../attendance/Attendance';
 import { CoscalasticsArea } from '../coscalasticsarea/CoscalasticsArea';
@@ -30,6 +31,8 @@ const pageStyle = `
 
 export const HomePage = React.forwardRef((props, ref) => {
 	const { handleShow, child, handleEditButton, editFlag } = useContext(DataContext);
+	const { student_data } = useSelector((state) => state.AcademicReducer);
+
 
 	return (
 		<Container
@@ -39,13 +42,13 @@ export const HomePage = React.forwardRef((props, ref) => {
 			ref={ref}
 			style={{ pageStyle }}
 		>
-			<Row onClick={() => handleEditButton(true)}>
+			<Row>
 				<Col className="Top_heading">First Term Examination 2018-19</Col>
 			</Row>
 
 			<Row>
 				<div className="flag_div">
-					{editFlag ? (
+					{editFlag && !student_data ? (
 						<Button
 							variant="primary"
 							size="sm"

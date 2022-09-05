@@ -4,12 +4,13 @@ import { useSelector } from 'react-redux/es/exports';
 import { DataContext } from '../../contexts/DataContext';
 import './studentdetail.css';
 export const StudentDetail = () => {
-	const { handleEditRow } = useContext(DataContext);
+	const { handleEditRow, editFlag } = useContext(DataContext);
 	const { student_data } = useSelector((state) => state.AcademicReducer);
 
 	return (
 		<Container>
-			<Button
+			{editFlag && (
+				<Button
 				variant="outline-secondary"
 				onClick={() =>
 					handleEditRow({
@@ -44,6 +45,9 @@ export const StudentDetail = () => {
 				</svg>
 				Edit Student Details
 			</Button>
+			)}
+
+			
 
 			<Row className="student_row">
 				<Col>

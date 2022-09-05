@@ -65,9 +65,10 @@ export const AcademicReducer = (state = initialState, { type, payload, index }) 
 			};
 
 		case EDIT_STUDENT:
-			const EditStudent = state.part2_data.map((e, i) =>
-				i === index ? { ...e, name: payload.name, dob: payload.dob, roll_no: payload.roll_no, std_class: payload.std_class, division: payload.division } : e
-			);
+			// const EditStudent = state.part2_data.map((e, i) =>
+			// 	i === index ? { ...e, name: payload.name, dob: payload.dob, roll_no: payload.roll_no, std_class: payload.std_class, division: payload.division } : e
+			// );
+			const EditStudent = payload
 
 			return {
 				...state,
