@@ -211,7 +211,7 @@ export const StudentForm = () => {
 							</Button>
 						) : (
 							<Button type="submit" className="mb-2" disabled={isSubmitting}>
-								{isSubmitting ? 'editing' : 'edit'}
+								{isSubmitting ? 'editing' : 'save'}
 							</Button>
 						)}
 					</FormikForm>

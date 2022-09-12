@@ -136,6 +136,7 @@ export const ScolasticForm = () => {
 										name="subject"
 										isValid={!errors.subject && touched.subject}
 										isInvalid={errors.subject && touched.subject}
+										disabled = {!editRow}
 									>
 										<option disabled value="">
 											--Please choose a subject--
@@ -253,7 +254,7 @@ export const ScolasticForm = () => {
 									</Button>
 								) : (
 									<Button type="submit" className="mb-2" disabled={isSubmitting}>
-										{isSubmitting ? 'editing' : 'edit'}
+										{isSubmitting ? 'editing' : 'save'}
 									</Button>
 								)}
 							</Col>

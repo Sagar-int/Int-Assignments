@@ -18,9 +18,9 @@ export const GradingScale = () => {
 					{gradedata.map((ele) => {
 						return (
 							<tr>
-								<td>{ele.range}</td>
+								<td className='range-remark'>{ele.range}</td>
 								<td>{ele.grade}</td>
-								<td>{ele.remarks}</td>
+								<td className='range-remark'>{ele.remarks}</td>
 							</tr>
 						);
 					})}
