@@ -9,16 +9,17 @@ import { addAttendenceDetails, editAttendenceDetails } from '../../../actions/pa
 import { useContext, useState } from 'react';
 import { DataContext } from '../../../contexts/DataContext';
 
-const initialValues = {
-	term: '',
-	working_days: '',
-	present_days: '',
-};
 export const AttendenceForm = () => {
 	const { editRow, id } = useContext(DataContext);
 	const { part3_data } = useSelector((state) => state.AcademicReducer);
 	const selectedTerms = part3_data.map((ele) => ele.term);
 	const dispatch = useDispatch();
+
+	const initialValues = {
+		term: !editRow ? part3_data.term : '',
+		working_days: !editRow ? part3_data[id].working_days : '',
+		present_days: !editRow ? part3_data[id].present_days : '',
+	};
 
 	const terms = ['Term-I', 'Term-II'];
 	const [workingDay, setWorkingDay] = useState(0);
@@ -109,22 +110,16 @@ export const AttendenceForm = () => {
 										isValid={!errors.term && touched.term}
 										isInvalid={errors.term && touched.term}
 									>
-										{editRow ? (
-											<option disabled value="">
-												--Please choose a skill--
-											</option>
-										) : (
-											<option selected hidden value={part3_data[id].term}>
-												{part3_data[id].term}
-											</option>
-										)}
+										<option disabled value="">
+											--Please choose a skill--
+										</option>
 
 										{editRow
 											? terms.map((term, i) => {
 													return !selectedTerms.includes(term) && <option key={i}>{term}</option>;
 											  })
 											: terms.map((term, i) => {
-													return <option key={i}>{term}</option>;
+													return <option key={i}>{terms[i]}</option>;
 											  })}
 									</Form.Select>
 
@@ -139,7 +134,7 @@ export const AttendenceForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>No. of Working Days</InputGroup.Text>
-									{/* <Form.Control
+									<Form.Control
 										value={values.working_days}
 										onChange={(e) => handleInputChange('working_days', e, setFieldValue)}
 										onBlur={handleBlur} // This apparently updates `touched`
@@ -149,34 +144,7 @@ export const AttendenceForm = () => {
 										type="number"
 										isValid={!errors.working_days && touched.working_days}
 										isInvalid={errors.working_days && touched.working_days}
-									/> */}
-
-									{editRow ? (
-										<Form.Control
-											value={values.working_days}
-											onChange={(e) => handleInputChange('working_days', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="working_days"
-											placeholder="must be greater than or equal to present days"
-											id="inlineFormInputGroup"
-											type="number"
-											isValid={!errors.working_days && touched.working_days}
-											isInvalid={errors.working_days && touched.working_days}
-										/>
-									) : (
-										<Form.Control
-											value={values.working_days}
-											onChange={(e) => handleInputChange('working_days', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="working_days"
-											placeholder={part3_data[id].working_days}
-											id="inlineFormInputGroup"
-											type="number"
-											isValid={!errors.working_days && touched.working_days}
-											isInvalid={errors.working_days && touched.working_days}
-										/>
-									)}
-
+									/>
 									{errors.working_days && touched.working_days ? (
 										<Form.Control.Feedback type="invalid">
 											{errors.working_days}
@@ -190,7 +158,7 @@ export const AttendenceForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>No. of Present Days</InputGroup.Text>
-									{/* <Form.Control
+									<Form.Control
 										value={values.present_days}
 										onChange={(e) => handleInputChange('present_days', e, setFieldValue)}
 										onBlur={handleBlur} // This apparently updates `touched`
@@ -200,33 +168,7 @@ export const AttendenceForm = () => {
 										type="number"
 										isValid={!errors.present_days && touched.present_days}
 										isInvalid={errors.present_days && touched.present_days}
-									/> */}
-									{editRow ? (
-										<Form.Control
-											value={values.present_days}
-											onChange={(e) => handleInputChange('present_days', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="present_days"
-											placeholder="must be less than or equal to working days"
-											id="inlineFormInputGroup"
-											type="number"
-											isValid={!errors.present_days && touched.present_days}
-											isInvalid={errors.present_days && touched.present_days}
-										/>
-									) : (
-										<Form.Control
-											value={values.present_days}
-											onChange={(e) => handleInputChange('present_days', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="present_days"
-											placeholder={part3_data[id].present_days}
-											id="inlineFormInputGroup"
-											type="number"
-											isValid={!errors.present_days && touched.present_days}
-											isInvalid={errors.present_days && touched.present_days}
-										/>
-									)}
-
+									/>
 									{errors.present_days && touched.working_days ? (
 										<Form.Control.Feedback type="invalid">
 											{errors.present_days}

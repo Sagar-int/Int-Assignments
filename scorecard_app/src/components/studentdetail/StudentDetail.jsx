@@ -9,7 +9,7 @@ export const StudentDetail = () => {
 
 	return (
 		<Container>
-			{editFlag && (
+			{/* {editFlag && (
 				<Button
 				variant="outline-secondary"
 				onClick={() =>
@@ -45,7 +45,7 @@ export const StudentDetail = () => {
 				</svg>
 				Edit Student Details
 			</Button>
-			)}
+			)} */}
 
 			
 

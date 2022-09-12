@@ -5,8 +5,7 @@ import { HomePage } from './components/homepage/HomePage';
 import { DataContext } from './contexts/DataContext';
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { renderToString } from "react-dom/server";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf";
 import html2pdf from "html2pdf.js";
 import { useSelector } from 'react-redux/es/exports';
 
@@ -98,7 +97,7 @@ function App() {
   );
 }
 
-
+	// "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
 
 
 export default App;

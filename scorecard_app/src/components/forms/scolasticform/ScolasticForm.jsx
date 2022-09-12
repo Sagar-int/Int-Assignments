@@ -6,24 +6,24 @@ import { Button, Col, InputGroup, Row, Form } from 'react-bootstrap';
 import { addSubjectDetails, editSubjectDetails } from '../../../actions/part1.action';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '../../../contexts/DataContext';
 
-const initialValues = {
-	subject: '',
-	fa: '',
-	f_oral: '',
-	sa: '',
-	s_oral: '',
-};
-
 export const ScolasticForm = () => {
-	const { editRow, id } = useContext(DataContext);
+	const { editRow, id, handleClose } = useContext(DataContext);
 	const { part1_data } = useSelector((state) => state.AcademicReducer);
 	const dispatch = useDispatch();
 
+	const initialValues = {
+		subject: !editRow ? part1_data[id].subject : '',
+		fa: !editRow ? part1_data[id].fa : '',
+		f_oral: !editRow ? part1_data[id].f_oral : '',
+		sa: !editRow ? part1_data[id].sa : '',
+		s_oral: !editRow ? part1_data[id].s_oral : '',
+	};
+
 	const selectedSubjects = part1_data.map((ele) => ele.subject);
-	const [subjects, setSubjects] = useState([
+	const subjects = [
 		'English',
 		'Hindi',
 		'Sanskrit',
@@ -35,7 +35,7 @@ export const ScolasticForm = () => {
 		'G.K',
 		'Conversation',
 		'Drawing',
-	]);
+	];
 
 	const part1ValidationSchema = Yup.object().shape({
 		subject: Yup.string().required('Please enter the Subject'),
@@ -100,6 +100,7 @@ export const ScolasticForm = () => {
 		dispatch(editSubjectDetails(values, id));
 		actions.setSubmitting(false);
 		actions.resetForm();
+		handleClose();
 		alert(`${values.subject} subject updated successfully`);
 	};
 
@@ -120,7 +121,6 @@ export const ScolasticForm = () => {
 
 				actions,
 			}) => {
-
 				return (
 					<FormikForm>
 						<Row className="mb-3 row_size">
@@ -137,15 +137,9 @@ export const ScolasticForm = () => {
 										isValid={!errors.subject && touched.subject}
 										isInvalid={errors.subject && touched.subject}
 									>
-										{editRow ? (
-											<option disabled value="">
-												--Please choose a subject--
-											</option>
-										) : (
-											<option selected hidden value={part1_data[id].subject}>
-												{part1_data[id].subject}
-											</option>
-										)}
+										<option disabled value="">
+											--Please choose a subject--
+										</option>
 
 										{editRow
 											? subjects.map((sub, i) => {
@@ -167,32 +161,17 @@ export const ScolasticForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>FA</InputGroup.Text>
-									
-									{editRow ? (
-										<Form.Control
-											value={values.fa}
-											onChange={(e) => handleInputChange('fa', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="fa"
-											id="inlineFormInputGroup"
-											placeholder="Score out of 80"
-											type="number"
-											isValid={!errors.fa && touched.fa}
-											isInvalid={errors.fa && touched.fa}
-										/>
-									) : (
-										<Form.Control
-											value={values.fa}
-											onChange={(e) => handleInputChange('fa', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="fa"
-											id="inlineFormInputGroup"
-											placeholder={part1_data[id].fa}
-											type="number"
-											isValid={!errors.fa && touched.fa}
-											isInvalid={errors.fa && touched.fa}
-										/>
-									)}
+									<Form.Control
+										value={values.fa}
+										onChange={(e) => handleInputChange('fa', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="fa"
+										id="inlineFormInputGroup"
+										placeholder="Score out of 80"
+										type="number"
+										isValid={!errors.fa && touched.fa}
+										isInvalid={errors.fa && touched.fa}
+									/>
 									{errors.fa && touched.fa ? (
 										<Form.Control.Feedback type="invalid">{errors.fa}</Form.Control.Feedback>
 									) : (
@@ -204,32 +183,17 @@ export const ScolasticForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>Oral-I</InputGroup.Text>
-								
-									{editRow ? (
-										<Form.Control
-											value={values.f_oral}
-											onChange={(e) => handleInputChange('f_oral', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="f_oral"
-											id="inlineFormInputGroup"
-											placeholder="Score out of 20"
-											type="number"
-											isValid={!errors.f_oral && touched.f_oral}
-											isInvalid={errors.f_oral && touched.f_oral}
-										/>
-									) : (
-										<Form.Control
-											value={values.f_oral}
-											onChange={(e) => handleInputChange('f_oral', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="f_oral"
-											id="inlineFormInputGroup"
-											placeholder={part1_data[id].f_oral}
-											type="number"
-											isValid={!errors.f_oral && touched.f_oral}
-											isInvalid={errors.f_oral && touched.f_oral}
-										/>
-									)}
+									<Form.Control
+										value={values.f_oral}
+										onChange={(e) => handleInputChange('f_oral', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="f_oral"
+										id="inlineFormInputGroup"
+										placeholder="Score out of 20"
+										type="number"
+										isValid={!errors.f_oral && touched.f_oral}
+										isInvalid={errors.f_oral && touched.f_oral}
+									/>
 									{errors.f_oral && touched.f_oral ? (
 										<Form.Control.Feedback type="invalid">{errors.f_oral}</Form.Control.Feedback>
 									) : (
@@ -241,32 +205,17 @@ export const ScolasticForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>SA</InputGroup.Text>
-									
-									{editRow ? (
-										<Form.Control
-											value={values.sa}
-											onChange={(e) => handleInputChange('sa', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="sa"
-											id="inlineFormInputGroup"
-											placeholder="Score out of 80"
-											type="number"
-											isValid={!errors.sa && touched.sa}
-											isInvalid={errors.sa && touched.sa}
-										/>
-									) : (
-										<Form.Control
-											value={values.sa}
-											onChange={(e) => handleInputChange('sa', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="sa"
-											id="inlineFormInputGroup"
-											placeholder={part1_data[id].sa}
-											type="number"
-											isValid={!errors.sa && touched.sa}
-											isInvalid={errors.sa && touched.sa}
-										/>
-									)}
+									<Form.Control
+										value={values.sa}
+										onChange={(e) => handleInputChange('sa', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="sa"
+										id="inlineFormInputGroup"
+										placeholder="Score out of 80"
+										type="number"
+										isValid={!errors.sa && touched.sa}
+										isInvalid={errors.sa && touched.sa}
+									/>
 									{errors.sa && touched.sa ? (
 										<Form.Control.Feedback type="invalid">{errors.sa}</Form.Control.Feedback>
 									) : (
@@ -278,32 +227,17 @@ export const ScolasticForm = () => {
 							<Col xs={12} md={6}>
 								<InputGroup className="mb-2">
 									<InputGroup.Text>Oral-II</InputGroup.Text>
-							
-									{editRow ? (
-										<Form.Control
-											value={values.s_oral}
-											onChange={(e) => handleInputChange('s_oral', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="s_oral"
-											id="inlineFormInputGroup"
-											placeholder="Score out of 20"
-											type="number"
-											isValid={!errors.s_oral && touched.s_oral}
-											isInvalid={errors.s_oral && touched.s_oral}
-										/>
-									) : (
-										<Form.Control
-											value={values.s_oral}
-											onChange={(e) => handleInputChange('s_oral', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="s_oral"
-											id="inlineFormInputGroup"
-											placeholder={part1_data[id].s_oral}
-											type="number"
-											isValid={!errors.s_oral && touched.s_oral}
-											isInvalid={errors.s_oral && touched.s_oral}
-										/>
-									)}
+									<Form.Control
+										value={values.s_oral}
+										onChange={(e) => handleInputChange('s_oral', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="s_oral"
+										id="inlineFormInputGroup"
+										placeholder="Score out of 20"
+										type="number"
+										isValid={!errors.s_oral && touched.s_oral}
+										isInvalid={errors.s_oral && touched.s_oral}
+									/>
 									{errors.s_oral && touched.s_oral ? (
 										<Form.Control.Feedback type="invalid">{errors.s_oral}</Form.Control.Feedback>
 									) : (
@@ -322,7 +256,6 @@ export const ScolasticForm = () => {
 										{isSubmitting ? 'editing' : 'edit'}
 									</Button>
 								)}
-
 							</Col>
 						</Row>
 					</FormikForm>

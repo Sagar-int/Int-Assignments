@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux/es/exports';
 import { DataContext } from '../../contexts/DataContext';
-import { useCoScolasticsData } from '../../hooks/academic';
+// import { useCoScolasticsData } from '../../hooks/academic';
 
 export const CoscalasticsArea = () => {
 	// const { isLoading, error, data } = useCoScolasticsData();

@@ -13,7 +13,7 @@ export const Signature1 = () => {
 	}
 
 	let Total = part1_data.length * 200;
-	let Percentage = ((grand_total / Total) * 100).toFixed(3);
+	// let Percentage = ((grand_total / Total) * 100).toFixed(3);
 
 
 	return (

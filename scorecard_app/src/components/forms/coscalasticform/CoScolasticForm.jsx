@@ -5,21 +5,21 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { addSkillDetails, editSkillDetails } from '../../../actions/part2.action';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '../../../contexts/DataContext';
 
-const initialValues = {
-	skill: '',
-	grade: '',
-};
-
 export const CoScolasticForm = () => {
-	const { editRow, id } = useContext(DataContext);
+	const { editRow, id, handleClose } = useContext(DataContext);
 	const { part2_data } = useSelector((state) => state.AcademicReducer);
 	const selectedSkills = part2_data.map((ele) => ele.skill);
 	const dispatch = useDispatch();
 
-	const [skills, setSkills] = useState([
+	const initialValues = {
+		skill: !editRow ? part2_data[id].skill : '',
+		grade: !editRow ? part2_data[id].grade : '',
+	};
+
+	const skills = [
 		'Development & Maturity',
 		'Responsibility',
 		'Self Confidence',
@@ -31,7 +31,7 @@ export const CoScolasticForm = () => {
 		'Attitude towards home work',
 		'Craft',
 		'Regularity and punctuality',
-	]);
+	];
 
 	const grade = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D'];
 
@@ -62,6 +62,7 @@ export const CoScolasticForm = () => {
 		dispatch(editSkillDetails(values, id));
 		actions.setSubmitting(false);
 		actions.resetForm();
+		handleClose();
 		alert(`${values.skill} skill edited successfully`);
 	};
 
@@ -88,16 +89,9 @@ export const CoScolasticForm = () => {
 										isValid={!errors.skill && touched.skill}
 										isInvalid={errors.skill && touched.skill}
 									>
-									
-										{editRow ? (
-											<option disabled value="">
-												--Please choose a skill--
-											</option>
-										) : (
-											<option selected hidden value={part2_data[id].skill}>
-												{part2_data[id].skill}
-											</option>
-										)}
+										<option disabled value="">
+											--Please choose a skill--
+										</option>
 
 										{editRow
 											? skills.map((skill, i) => {
@@ -130,9 +124,6 @@ export const CoScolasticForm = () => {
 										isValid={!errors.grade && touched.grade}
 										isInvalid={errors.grade && touched.grade}
 									>
-										{/* <option disabled value="">
-											--Please choose a grade--
-										</option> */}
 
 										{editRow ? (
 											<option disabled value="">

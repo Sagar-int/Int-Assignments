@@ -9,18 +9,18 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { addStudentDetails, editStudentDetails } from '../../../actions/student.action';
 import { DataContext } from '../../../contexts/DataContext';
 
-const initialValues = {
-	name: '',
-	dob: '',
-	roll_no: '',
-	std_class: '',
-	division: '',
-};
-
 export const StudentForm = () => {
-	const { editRow, id } = useContext(DataContext);
+	const { editRow, id, handleClose } = useContext(DataContext);
 	const dispatch = useDispatch();
 	const { student_data } = useSelector((state) => state.AcademicReducer);
+
+	const initialValues = {
+		name: !editRow ? student_data.name : '',
+		dob: !editRow ? student_data.dob : '',
+		roll_no: !editRow ? student_data.roll_no : '',
+		std_class: !editRow ? student_data.std_class : '',
+		division: !editRow ? student_data.division : '',
+	};
 
 	const studentDetailSchema = Yup.object().shape({
 		name: Yup.string()
@@ -66,6 +66,7 @@ export const StudentForm = () => {
 		dispatch(addStudentDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
+		handleClose();
 		alert(`Students details successfully added`);
 	};
 
@@ -73,6 +74,7 @@ export const StudentForm = () => {
 		dispatch(editStudentDetails(values, id));
 		actions.setSubmitting(false);
 		actions.resetForm();
+		handleClose();
 		alert(`Students details successfully Edited`);
 	};
 
@@ -89,30 +91,16 @@ export const StudentForm = () => {
 							<Form.Group className="mb-3" controlId="formBasicEmail">
 								<Form.Label>Name</Form.Label>
 
-								{editRow ? (
-									<Form.Control
-										value={values.name}
-										onChange={(e) => handleInputChange('name', e, setFieldValue)}
-										onBlur={handleBlur} // This apparently updates `touched`
-										name="name"
-										type="text"
-										placeholder="Please Enter Student's Name"
-										isValid={!errors.name && touched.name}
-										isInvalid={errors.name && touched.name}
-									/>
-								) : (
-									<Form.Control
-										value={values.s_oral}
-										onChange={(e) => handleInputChange('s_oral', e, setFieldValue)}
-										onBlur={handleBlur} // This apparently updates `touched`
-										name="s_oral"
-										id="inlineFormInputGroup"
-										placeholder={student_data.name}
-										type="number"
-										isValid={!errors.s_oral && touched.s_oral}
-										isInvalid={errors.s_oral && touched.s_oral}
-									/>
-								)}
+								<Form.Control
+									value={values.name}
+									onChange={(e) => handleInputChange('name', e, setFieldValue)}
+									onBlur={handleBlur} // This apparently updates `touched`
+									name="name"
+									type="text"
+									placeholder="Please Enter Student's Name"
+									isValid={!errors.name && touched.name}
+									isInvalid={errors.name && touched.name}
+								/>
 
 								{errors.name && touched.name ? (
 									<Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
@@ -129,29 +117,16 @@ export const StudentForm = () => {
 							<Col xs={12} md={6}>
 								<Form.Group className="mb-3" controlId="formBasicEmail">
 									<Form.Label>Date of Birth</Form.Label>
-									{editRow ? (
-										<Form.Control
-											value={values.dob}
-											onChange={(e) => handleInputChange('dob', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="dob"
-											type="date"
-											placeholder="enter date of Birth"
-											isValid={!errors.dob && touched.dob}
-											isInvalid={errors.dob && touched.dob}
-										/>
-									) : (
-										<Form.Control
-											value={values.dob}
-											onChange={(e) => handleInputChange('dob', e, setFieldValue)}
-											onBlur={handleBlur} // This apparently updates `touched`
-											name="dob"
-											type="date"
-											placeholder={student_data.dob}
-											isValid={!errors.dob && touched.dob}
-											isInvalid={errors.dob && touched.dob}
-										/>
-									)}
+									<Form.Control
+										value={values.dob}
+										onChange={(e) => handleInputChange('dob', e, setFieldValue)}
+										onBlur={handleBlur} // This apparently updates `touched`
+										name="dob"
+										type="date"
+										placeholder="enter date of Birth"
+										isValid={!errors.dob && touched.dob}
+										isInvalid={errors.dob && touched.dob}
+									/>
 
 									{errors.dob && touched.dob ? (
 										<Form.Control.Feedback type="invalid">{errors.dob}</Form.Control.Feedback>
