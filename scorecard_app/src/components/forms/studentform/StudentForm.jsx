@@ -123,6 +123,7 @@ export const StudentForm = () => {
 										onBlur={handleBlur} // This apparently updates `touched`
 										name="dob"
 										type="date"
+										min="1995-01-01" max="2015-12-31"
 										placeholder="enter date of Birth"
 										isValid={!errors.dob && touched.dob}
 										isInvalid={errors.dob && touched.dob}

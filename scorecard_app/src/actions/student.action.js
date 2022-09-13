@@ -1,4 +1,4 @@
-import { ADD_STUDENT, EDIT_STUDENT } from "../action-types/action.types"
+import { ADD_STUDENT, DELETE_STUDENT, EDIT_STUDENT } from "../action-types/action.types"
 
 export const addStudentDetails = (data) => {
     return {
@@ -11,6 +11,13 @@ export const editStudentDetails = (data, index) => {
     return {
         type: EDIT_STUDENT,
         payload:data,
+        index:index
+    }
+}
+
+export const deleteAttendenceDetails = (index) => {
+    return {
+        type: DELETE_STUDENT,
         index:index
     }
 }
