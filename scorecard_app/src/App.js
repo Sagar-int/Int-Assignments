@@ -1,12 +1,8 @@
 import { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './App.css';
-<<<<<<< HEAD
 // import { HomePage } from './components/homepage/HomePage';
 import { HomePage } from './components/Homepage/HomePage';
-=======
-import { HomePage } from './components/homepage/HomePage';
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 import { DataContext } from './contexts/DataContext';
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';

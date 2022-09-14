@@ -123,10 +123,7 @@ export const StudentForm = () => {
 										onBlur={handleBlur} // This apparently updates `touched`
 										name="dob"
 										type="date"
-<<<<<<< HEAD
 										min="1995-01-01" max="2015-12-31"
-=======
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 										placeholder="enter date of Birth"
 										isValid={!errors.dob && touched.dob}
 										isInvalid={errors.dob && touched.dob}
@@ -215,11 +212,7 @@ export const StudentForm = () => {
 							</Button>
 						) : (
 							<Button type="submit" className="mb-2" disabled={isSubmitting}>
-<<<<<<< HEAD
 								{isSubmitting ? 'editing' : 'save'}
-=======
-								{isSubmitting ? 'editing' : 'edit'}
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 							</Button>
 						)}
 					</FormikForm>

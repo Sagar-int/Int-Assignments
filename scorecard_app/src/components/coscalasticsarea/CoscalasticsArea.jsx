@@ -1,17 +1,12 @@
 import { useContext } from 'react';
 import { Table } from 'react-bootstrap';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import {  deleteSkillDetails } from '../../actions/part2.action';
-=======
-import { useSelector } from 'react-redux/es/exports';
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 import { DataContext } from '../../contexts/DataContext';
 // import { useCoScolasticsData } from '../../hooks/academic';
 
 export const CoscalasticsArea = () => {
 	// const { isLoading, error, data } = useCoScolasticsData();
-<<<<<<< HEAD
 	const dispatch = useDispatch();
 	const { handleEditRow, editFlag } = useContext(DataContext);
 	const { part2_data } = useSelector((state) => state.AcademicReducer);
@@ -20,11 +15,6 @@ export const CoscalasticsArea = () => {
 		dispatch(deleteSkillDetails(id));
 	};
 
-=======
-	const { handleEditRow, editFlag } = useContext(DataContext);
-	const { part2_data } = useSelector((state) => state.AcademicReducer);
-
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 	return (
 		<Table bordered hover className="table_border common_width" responsive="xs">
 			<thead>
@@ -77,7 +67,6 @@ export const CoscalasticsArea = () => {
 							</td>
 							<td>{ele.skill}</td>
 							<td>{ele.grade}</td>
-<<<<<<< HEAD
 
 							{editFlag && (
 								<td onClick={() => handleDeleteRow(i)}>
@@ -97,8 +86,6 @@ export const CoscalasticsArea = () => {
 									</svg>
 								</td>
 							)}
-=======
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 						</tr>
 					);
 				})}

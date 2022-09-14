@@ -39,33 +39,21 @@ export const Signature1 = () => {
 			<Row>
 				<div className="all_sign_row">
 					<div>
-<<<<<<< HEAD
 						<p>___________________________________</p>
-=======
-						<p>Mr.Unknown</p>
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 						<h6>
 							<em>Techer's Signature</em>
 						</h6>
 					</div>
 
 					<div>
-<<<<<<< HEAD
 						<p>___________________________________</p>
-=======
-						<p>Mr. XYZ's Papa</p>
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 						<h6>
 							<em>Parents's Signature</em>
 						</h6>
 					</div>
 
 					<div>
-<<<<<<< HEAD
 						<p>___________________________________</p>
-=======
-						<p>Mr.Super Unknown</p>
->>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 						<h6>
 							<em>Principal's Signature</em>
 						</h6>
