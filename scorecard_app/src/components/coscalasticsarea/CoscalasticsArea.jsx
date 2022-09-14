@@ -12,7 +12,8 @@ export const CoscalasticsArea = () => {
 	const { part2_data } = useSelector((state) => state.AcademicReducer);
 
 	const handleDeleteRow = (id) => {
-		dispatch(deleteSkillDetails(id));
+		// eslint-disable-next-line no-restricted-globals
+		confirm("Are you sure, You want to delete this item?")&& dispatch(deleteSkillDetails(id));
 	};
 
 	return (

@@ -12,7 +12,9 @@ export const Attendance = () => {
 	const { part3_data } = useSelector((state) => state.AcademicReducer);
 
 	const handleDeleteRow = (id) => {
-		dispatch(deleteAttendenceDetails(id));
+		// eslint-disable-next-line no-restricted-globals
+		confirm('Are you sure, You want to delete this item?') && dispatch(deleteAttendenceDetails(id));
+		
 	};
 
 	return (

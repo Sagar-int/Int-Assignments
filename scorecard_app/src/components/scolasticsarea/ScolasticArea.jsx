@@ -22,7 +22,8 @@ export const ScolasticArea = () => {
 	let Percentage = ((grand_total / Total) * 100).toFixed(2);
 
 	const handleDeleteRow = (id) => {
-		dispatch(deleteSubjectDetails(id));
+		// eslint-disable-next-line no-restricted-globals
+		confirm("Are you sure, You want to delete this item?")&& dispatch(deleteSubjectDetails(id))
 	};
 
 	return (
