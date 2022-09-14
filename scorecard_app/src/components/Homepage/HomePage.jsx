@@ -70,7 +70,7 @@ export const HomePage = React.forwardRef((props, ref) => {
 							</svg>
 							Add Student Details
 						</Button>
-					) : editFlag ? (
+					) : (
 						<Button
 							variant="outline-secondary"
 							onClick={() =>
@@ -98,7 +98,7 @@ export const HomePage = React.forwardRef((props, ref) => {
 							</svg>
 							Edit Student Details
 						</Button>
-					) : null}
+					)}
 				</div>
 				<StudentDetail />
 			</Row>

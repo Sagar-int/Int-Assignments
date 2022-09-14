@@ -88,7 +88,10 @@ export const CoScolasticForm = () => {
 										name="skill"
 										isValid={!errors.skill && touched.skill}
 										isInvalid={errors.skill && touched.skill}
+<<<<<<< HEAD
 										disabled = {!editRow}
+=======
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 									>
 										<option disabled value="">
 											--Please choose a skill--
@@ -154,7 +157,11 @@ export const CoScolasticForm = () => {
 									</Button>
 								) : (
 									<Button type="submit" className="mb-2" disabled={isSubmitting}>
+<<<<<<< HEAD
 										{isSubmitting ? 'editing' : 'save'}
+=======
+										{isSubmitting ? 'editing' : 'edit'}
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 									</Button>
 								)}
 							</Col>

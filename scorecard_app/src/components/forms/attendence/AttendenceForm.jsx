@@ -16,17 +16,26 @@ export const AttendenceForm = () => {
 	const dispatch = useDispatch();
 
 	const initialValues = {
+<<<<<<< HEAD
 		term: !editRow ? part3_data[id].term : '',
+=======
+		term: !editRow ? part3_data.term : '',
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 		working_days: !editRow ? part3_data[id].working_days : '',
 		present_days: !editRow ? part3_data[id].present_days : '',
 	};
 
 	const terms = ['Term-I', 'Term-II'];
+<<<<<<< HEAD
 	const [workingDay, setWorkingDay] = useState(!editRow ? part3_data[id].working_days : 0);
 	const [presentDay, setPresentDay] = useState(!editRow ? part3_data[id].present_days : 0);
 
 	
 	
+=======
+	const [workingDay, setWorkingDay] = useState(0);
+	const [presentDay, setPresentDay] = useState(0);
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 
 	const part3ValidationSchema = Yup.object().shape({
 		term: Yup.string().required('Please enter the term *'),
@@ -112,7 +121,10 @@ export const AttendenceForm = () => {
 										name="term"
 										isValid={!errors.term && touched.term}
 										isInvalid={errors.term && touched.term}
+<<<<<<< HEAD
 										disabled = {!editRow}
+=======
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 									>
 										<option disabled value="">
 											--Please choose a skill--
@@ -190,7 +202,11 @@ export const AttendenceForm = () => {
 									</Button>
 								) : (
 									<Button type="submit" className="mb-2" disabled={isSubmitting}>
+<<<<<<< HEAD
 										{isSubmitting ? 'editing' : 'save'}
+=======
+										{isSubmitting ? 'editing' : 'edit'}
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 									</Button>
 								)}
 							</Col>

@@ -1,12 +1,17 @@
 import { useContext } from 'react';
 import { Table } from 'react-bootstrap';
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { deleteAttendenceDetails } from '../../actions/part3.action';
+=======
+import { useSelector } from 'react-redux/es/exports';
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 import { DataContext } from '../../contexts/DataContext';
 // import { useAttendenceData } from '../../hooks/academic';
 
 export const Attendance = () => {
 	// const { isLoading, error, data } = useAttendenceData();
+<<<<<<< HEAD
 	const dispatch = useDispatch();
 	const { handleEditRow, editFlag } = useContext(DataContext);
 	const { part3_data } = useSelector((state) => state.AcademicReducer);
@@ -15,6 +20,11 @@ export const Attendance = () => {
 		dispatch(deleteAttendenceDetails(id));
 	};
 
+=======
+	const { handleEditRow, editFlag } = useContext(DataContext);
+	const { part3_data } = useSelector((state) => state.AcademicReducer);
+
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 	return (
 		<Table striped bordered hover className="table_border common_width" responsive>
 			<thead>
@@ -69,6 +79,7 @@ export const Attendance = () => {
 							<td>{ele.working_days}</td>
 							<td>{ele.present_days}</td>
 							<td>{ele.percentage}%</td>
+<<<<<<< HEAD
 
 							{editFlag && (
 								<td onClick={() => handleDeleteRow(i)}>
@@ -88,6 +99,8 @@ export const Attendance = () => {
 									</svg>
 								</td>
 							)}
+=======
+>>>>>>> 8c278d5df369dbaffa85183290cd95c5b6a29a65
 						</tr>
 					);
 				})}
