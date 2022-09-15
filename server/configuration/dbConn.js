@@ -1,6 +1,6 @@
-import Promise from "bluebird";
-import Config from "./config";
-import * as pgPromise from "pg-promise";
+import * as Promise from "bluebird";
+import Config from "./config.js";
+import pgPromise from "pg-promise";
 
 const initOptions = {
   promiceLib: Promise,
@@ -30,17 +30,17 @@ const cn = {
 
 // const db = pgp('postgres://username:password@host:port/database');
 
-pgp.pg.types.setTypeParser(1114, (s) => s);
+pgp.pg.types.setTypeParser(5432, (s) => s);
 
 const db = pgp(cn); // database instance;
 
 db.connect()
   .then((obj) => {
+    console.log("Connection Successful with port:", cn.port);
     obj.done(); // success, release the connection;
   })
   .catch((error) => {
     console.log("ERROR:", error.message || error);
   });
-
 
 export default db;

@@ -1,6 +1,10 @@
 {
 	"name": "scorecard_app",
 	"version": "0.1.0",
+	"engines": {
+		"node": "16.x",
+		"npm": "8.x"
+	  },
 	"private": true,
 	"dependencies": {
 		"@react-pdf/renderer": "^2.3.0",

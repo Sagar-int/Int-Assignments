@@ -1,6 +1,7 @@
 import express, { json, urlencoded } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import  db  from "./configuration/dbConn.js";
 
 const app = express();
 
