@@ -1,12 +1,13 @@
 import express, { json, urlencoded } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import  db  from "./configuration/dbConn.js";
+import subRouter  from "./routes/subject.routes.js";
+import helmet from "helmet";
 
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3001"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -18,6 +19,12 @@ app.use(json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
+app.use(helmet());
+
+
+
+
+app.use('/api/subject', subRouter);
 
 app.use(function(req, res, next) {
 

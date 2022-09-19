@@ -3,7 +3,7 @@ import Config from "./config.js";
 import pgPromise from "pg-promise";
 
 const initOptions = {
-  promiceLib: Promise,
+  // promiceLib: Promise,
   query(e) {
     console.log(e.query);
   },
