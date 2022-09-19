@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './App.css';
 // import { HomePage } from './components/homepage/HomePage';
-import { HomePage } from './components/Homepage/HomePage';
+import { HomePage } from './components/homepage/HomePage';
 import { DataContext } from './contexts/DataContext';
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
