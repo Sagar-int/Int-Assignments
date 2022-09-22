@@ -1,12 +1,9 @@
 import db from "../configuration/dbConn.js";
 import { getErrorText } from "../controllers/common.js";
 
-export const get_subjects = async () => {
+export const get_skills = async () => {
   try {
-    const data = await db.any(
-      "SELECT id, subject, fa, f_oral, sa, s_oral  FROM tbl_subject"
-    );
-
+    const data = await db.any("Select * from tbl_skill");
     if (data.length > 0) {
       return { success: true, results: data };
     } else {
@@ -19,14 +16,24 @@ export const get_subjects = async () => {
   }
 };
 
-export const add_subject = async (sub) => {
+export const add_skill = async (skill) => {
   try {
-    const data = await db.one(
-      "INSERT INTO tbl_subject(subject,fa,f_oral,sa,s_oral, total_mark) VALUES($1,$2,$3,$4,$5,$6) RETURNING id",
-      [sub.subject, sub.fa, sub.f_oral, sub.sa, sub.s_oral, sub.total_mark]
+    const response = await db.any(
+      "select * from tbl_skill where skill = ($1)",
+      [skill.skill]
     );
 
-    return data;
+    if (response.length !== 0) {
+      const message = "Skill is Allready present.";
+      return { message };
+    } else {
+      const data = await db.one(
+        "INSERT INTO tbl_skill(skill, grade) VALUES($1,$2) RETURNING id",
+        [skill.skill, skill.grade]
+      );
+
+      return data;
+    }
   } catch (err) {
     var errorText = getErrorText(err);
     var error = new Error(errorText);
@@ -34,14 +41,12 @@ export const add_subject = async (sub) => {
   }
 };
 
-export const edit_subject = async (sub, sub_id) => {
+export const edit_skill = async (skill, skill_id) => {
   try {
     const data = await db.result(
-      "UPDATE tbl_subject set subject=($1),sa=($2),s_oral=($3),fa=($4),f_oral=($5) where id=($6)",
-      [sub.subject, sub.fa, sub.f_oral, sub.sa, sub.s_oral, sub_id]
+      "UPDATE tbl_skill set skill=($1), grade=($2) where id=($3)",
+      [skill.skill, skill.grade, skill_id]
     );
-
-    return data;
   } catch (err) {
     var errorText = getErrorText(err);
     var error = new Error(errorText);
@@ -49,12 +54,11 @@ export const edit_subject = async (sub, sub_id) => {
   }
 };
 
-export const delete_subject = async (sub_id) => {
+export const delete_skill = async (skill_id) => {
   try {
-    const data = await db.result("DELETE from tbl_subject where id=($1)", [
-      sub_id,
+    const data = await db.result("DELETE from tbl_skill where id=($1)", [
+      skill_id,
     ]);
-    return data;
   } catch (err) {
     var errorText = getErrorText(err);
     var error = new Error(errorText);
@@ -64,10 +68,10 @@ export const delete_subject = async (sub_id) => {
 
 
 //For Db Validation
-export const subjectExist = async (sub) => {
+export const skillExist = async (sub) => {
   try {
     const data = await db.any(
-      "SELECT * from tbl_subject where subject = ($1)",
+      "SELECT * from tbl_skill where skill = ($1)",
       [sub]
     );
 
@@ -83,13 +87,11 @@ export const subjectExist = async (sub) => {
   }
 };
 
-export const subjectIdExist = async (subId) => {
+export const skillIdExist = async (skillId) => {
   try {
-    const data = await db.any("SELECT * from tbl_subject where id = ($1)", [
-      subId,
+    const data = await db.any("SELECT * from tbl_skill where id = ($1)", [
+      skillId,
     ]);
-
-    console.log("data-->", data);
 
     if (data.length === 0) {
       return { fail: true };

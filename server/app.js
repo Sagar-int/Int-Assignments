@@ -1,7 +1,9 @@
 import express, { json, urlencoded } from "express";
+// const logger = require('morgan');
 import bodyParser from "body-parser";
 import cors from "cors";
 import subRouter  from "./routes/subject.routes.js";
+import skillRouter  from "./routes/skill.routes.js";
 import helmet from "helmet";
 
 const app = express();
@@ -13,6 +15,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(logger('dev'));
 
 // parse requests of content-type - application/json
 app.use(json());
@@ -21,10 +24,11 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
 
-
-
-
 app.use('/api/subject', subRouter);
+app.use('/api/skill', skillRouter);
+
+
+
 
 app.use(function(req, res, next) {
 
