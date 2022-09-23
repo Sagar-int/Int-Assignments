@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const config = {
   db: {
     DB_HOST: process.env.DB_HOST,
@@ -12,6 +15,7 @@ const config = {
   errorText: {
     value: "An internal error has occurred. Please try again later.",
   },
+  jwtSecret: process.env.JWT_SECRET
 };
 
 export default config;

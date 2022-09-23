@@ -4,7 +4,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import subRouter  from "./routes/subject.routes.js";
 import skillRouter  from "./routes/skill.routes.js";
+import authRouter  from "./routes/auth.routes.js";
 import helmet from "helmet";
+import createHttpError from "http-errors";
 
 const app = express();
 
@@ -17,15 +19,15 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(logger('dev'));
 
-// parse requests of content-type - application/json
 app.use(json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
 
+
+// Endpoints 
 app.use('/api/subject', subRouter);
 app.use('/api/skill', skillRouter);
+app.use('/api/auth', authRouter);
 
 
 
@@ -51,7 +53,8 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) {
     // console.log( req, res, next )
-    next(createError(404));
+    if (!req.user) return next(createHttpError(401, 'Please login to view this page.'))
+    next()
   });
 
 // error handler
