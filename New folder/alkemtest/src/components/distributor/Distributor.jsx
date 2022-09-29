@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup, ListGroup, Spinner } from "react-bootstrap";
+import { DataContext } from "../../contexts/DataContext.jsx";
 import AXIOS from "../../shared/api.js";
 
 export const Distributor = () => {
   const [data, setData] = useState("");
+  const { handleUserId , userId} = useContext(DataContext);
 
   useEffect(() => {
     AXIOS.get("/api/distributor/distributor_list/E?dn=&page_no=1")
@@ -15,7 +17,7 @@ export const Distributor = () => {
       });
   }, []);
 
-//   console.log("data====>", data);
+  console.log("userId====>", userId);
 
   return (
     <div>
@@ -42,6 +44,7 @@ export const Distributor = () => {
               <ListGroup.Item>
                 <Form.Check
                   type="radio"
+                  onClick={(e)=>{handleUserId(ele.customer_code)}}
                   label={
                     ele.customer_name + "-" + ele.customer_code + " " + "("+ ele.location + ")"
                   }

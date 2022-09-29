@@ -5,6 +5,7 @@ export const DataContext = createContext();
 export const DataContextProvider = ({ children }) => {
 	const [show, setShow] = useState(false);
 	const [child, setChild] = useState('');
+	const [userId, setUserId] = useState(null);
 
 	const handleClose = () => {
 		setChild('');
@@ -15,10 +16,15 @@ export const DataContextProvider = ({ children }) => {
 		setShow(true);
 	};
 
+	const handleUserId = (enterId) => {
+		setUserId(enterId)
+	};
+
 	const value = {
-		show,child,
+		show,child,userId,
 		handleClose,
 		handleShow,
+		handleUserId
 	};
 
 	return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
