@@ -7,6 +7,7 @@ import skillRouter  from "./routes/skill.routes.js";
 import authRouter  from "./routes/auth.routes.js";
 import helmet from "helmet";
 import createHttpError from "http-errors";
+import passport from "passport";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(helmet());
+app.use(passport.initialize());
 
 
 // Endpoints 

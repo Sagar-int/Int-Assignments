@@ -1,0 +1,44 @@
+.navbar_comp {
+	overflow: hidden;
+	background-color: #333;
+	position: fixed;
+	/* top: 0; */
+	width: 100%;
+	z-index: 100;
+	height: 3rem;
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left_bar {
+	width: 10%;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 10px;
+}
+.left_bar_btn {
+	border: none;
+	padding: 0;
+	background: none;
+  color: darkgray;
+}
+.left_bar_btn:hover {
+  color: #ffff;
+}
+
+.right_bar {
+	width: 10%;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 10px;
+}
+
+span {
+	cursor: pointer;
+	color: grey;
+}
+
+
+

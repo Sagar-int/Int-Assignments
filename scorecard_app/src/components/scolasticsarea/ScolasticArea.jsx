@@ -18,7 +18,7 @@ export const ScolasticArea = () => {
 		grand_total = grand_total + parseInt(part1_data[i].total_mark);
 	}
 
-	let Total = part1_data.length * 200;
+	let Total = part1_data?.length * 200;
 	let Percentage = ((grand_total / Total) * 100).toFixed(2);
 
 	const handleDeleteRow = (id) => {

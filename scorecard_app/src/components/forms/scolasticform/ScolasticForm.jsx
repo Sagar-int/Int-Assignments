@@ -22,7 +22,7 @@ export const ScolasticForm = () => {
 		s_oral: !editRow ? part1_data[id].s_oral : '',
 	};
 
-	const selectedSubjects = part1_data.map((ele) => ele.subject);
+	const selectedSubjects = part1_data?.map((ele) => ele.subject);
 	const subjects = [
 		'English',
 		'Hindi',
@@ -144,7 +144,7 @@ export const ScolasticForm = () => {
 
 										{editRow
 											? subjects.map((sub, i) => {
-													return !selectedSubjects.includes(sub) && <option key={i}>{sub}</option>;
+													return !selectedSubjects?.includes(sub) && <option key={i}>{sub}</option>;
 											  })
 											: subjects.map((sub, i) => {
 													return <option key={i}>{sub}</option>;

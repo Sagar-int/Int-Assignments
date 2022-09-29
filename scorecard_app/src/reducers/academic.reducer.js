@@ -10,13 +10,22 @@ import {
 	EDIT_SKILL,
 	EDIT_STUDENT,
 	EDIT_SUBJECT,
+	LOGIN,
+	LOGOUT,
 } from '../action-types/action.types';
+
+import jwt_decode from 'jwt-decode';
 
 const initialState = {
 	part1_data: [],
 	part2_data: [],
 	part3_data: [],
 	student_data: null,
+	isloggedin: false,
+	email: '',
+	errorMsg: '',
+	auth_token: '',
+	userData: {},
 };
 
 export const AcademicReducer = (state = initialState, { type, payload, index }) => {
@@ -123,6 +132,22 @@ export const AcademicReducer = (state = initialState, { type, payload, index }) 
 			return {
 				...state,
 				student_data: EditStudent,
+			};
+
+		case LOGIN:
+			let decodeData = jwt_decode(payload.token);
+		
+			return {
+				...state,
+				isloggedin: payload.token !== null || payload.token !== undefined ? true : false,
+				email: payload.user.email,
+				auth_token: payload.token,
+				userData: decodeData,
+			};
+
+		case LOGOUT:
+			return {
+				...initialState,
 			};
 
 		default:

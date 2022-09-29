@@ -12,3 +12,10 @@ export const DELETE_SUBJECT = "DELETE_SUBJECT";
 export const DELETE_SKILL = "DELETE_SKILL";
 export const DELETE_ATTENDENCE = "DELETE_ATTENDENCE";
 export const DELETE_STUDENT = "DELETE_STUDENT";
+
+
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+
+
+

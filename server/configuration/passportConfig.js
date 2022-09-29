@@ -1,10 +1,14 @@
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as JwtStrategy } from "passport-jwt";
+import { ExtractJwt } from "passport-jwt";
+
 import {
   emailExists,
   createUser,
   matchPassword,
   userToken,
 } from "../models/auth.model.js";
+import config from "./config.js";
 
 export const passConfig = (passport) => {
   passport.use(
@@ -44,10 +48,35 @@ export const passConfig = (passport) => {
           if (!user) return done(null, false);
           const isMatch = matchPassword(password, user.password);
           if (!isMatch) return done(null, false);
-          const token = userToken(user)
-          return done(null, { id: user.id, email: user.email},token);
+          const token = "Bearer " + userToken(user);
+          return done(null, { id: user.id, email: user.email }, token);
         } catch (error) {
           return done(error, false);
+        }
+      }
+    )
+  );
+};
+
+export const passTokenConfig = (passport) => {
+
+  passport.use(
+    "jwt",
+    new JwtStrategy(
+      {
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: config.jwtSecret,
+      },
+      async (jwt_payload, done) => {
+        try {
+          console.log("jwt_payload===>", jwt_payload);
+          const userExists = await emailExists(jwt_payload.email_id);
+          if (userExists) {
+            return done(null, true);
+          }
+          return done(null, false);
+        } catch (error) {
+          done(error);
         }
       }
     )

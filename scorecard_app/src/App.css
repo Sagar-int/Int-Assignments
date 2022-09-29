@@ -1,20 +1,36 @@
-.table_border{
-    border: 1px solid black;
+.table_border {
+	border: 1px solid black;
 }
 
-.save_btn{
-    width: 15%;
-    margin: 10px auto 10px auto;
-    text-align: center;
+.save_btn {
+	width: 15%;
+	margin: 10px auto 10px auto;
+	text-align: center;
 }
 
-.footer-center{
-    text-align: center;
-    cursor: pointer;
-    margin-bottom: 10px;
+.footer-center {
+	text-align: center;
+	cursor: pointer;
+	margin-bottom: 10px;
 }
 
-.print_download_btn_div{
-    display: flex;
-    justify-content: space-between;
+.print_download_btn_div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.dash_line {
+	border-bottom: 1px dashed black;
+	width: 30%;
+	margin-left: 10px;
+}
+
+.start_img {
+    width: 100%;
+    height: 100vh;
+
+	background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #cccccc;
 }

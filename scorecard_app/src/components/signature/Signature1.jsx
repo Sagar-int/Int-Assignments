@@ -12,9 +12,8 @@ export const Signature1 = () => {
 		grand_total = grand_total + parseInt(part1_data[i].total_mark);
 	}
 
-	let Total = part1_data.length * 200;
+	let Total = part1_data?.length * 200;
 	// let Percentage = ((grand_total / Total) * 100).toFixed(3);
-
 
 	return (
 		<Container>
@@ -39,21 +38,21 @@ export const Signature1 = () => {
 			<Row>
 				<div className="all_sign_row">
 					<div>
-						<p>___________________________________</p>
+						<p className="dash_line_sign"></p>
 						<h6>
 							<em>Techer's Signature</em>
 						</h6>
 					</div>
 
 					<div>
-						<p>___________________________________</p>
+						<p className="dash_line_sign"></p>
 						<h6>
 							<em>Parents's Signature</em>
 						</h6>
 					</div>
 
 					<div>
-						<p>___________________________________</p>
+						<p className="dash_line_sign"></p>
 						<h6>
 							<em>Principal's Signature</em>
 						</h6>

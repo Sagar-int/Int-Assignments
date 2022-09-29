@@ -1,0 +1,20 @@
+.top_div{
+    padding: 20px;
+}
+
+.top_div h3 span{
+    font-size: large;
+}
+
+.prod_cols{
+    margin-right: 10px;
+    background: #ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* border: 1px solid red; */
+    padding: 3px;
+  
+
+}

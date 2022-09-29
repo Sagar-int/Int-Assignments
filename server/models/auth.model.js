@@ -46,7 +46,8 @@ export const userToken = (user) => {
   const token = jwt.sign(
     { userId: user.id, email_id: user.email },
     config.jwtSecret,
-    { expiresIn: Math.round((new Date().getTime()) / 1000) + (24 * 60 * 60) }
+    // { expiresIn: Math.round((new Date().getTime()) / 1000) + (24 * 60 * 60) }
+    { expiresIn: 1000*60 }
   );
   return token;
 };
