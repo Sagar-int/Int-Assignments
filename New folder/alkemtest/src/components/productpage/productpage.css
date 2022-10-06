@@ -1,20 +1,64 @@
-.top_div{
-    padding: 20px;
+.top_div {
+  padding: 20px;
 }
 
-.top_div h3 span{
-    font-size: large;
+.top_div h3 span {
+  font-size: large;
 }
 
-.prod_cols{
-    margin-right: 10px;
-    background: #ffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    /* border: 1px solid red; */
-    padding: 3px;
-  
+.prod_cols {
+  margin-right: 10px;
+  background: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* border: 1px solid red; */
+  padding: 3px;
+}
 
+.prod_list_container {
+  /* border: 1px solid red; */
+  border-radius: 5px;
+  background: #ffff;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.prod_list_cols h4{
+  color: rgb(84, 63, 63);
+}
+.not_found{
+  text-align: center;
+}
+
+
+/*common styles for listing */
+ul {
+  list-style: none;
+  border: 1px solid rgb(202, 199, 199);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+li{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+li input{
+  margin-right: 15px;
+}
+
+.prod_cols button{
+  /* border: 1px solid rgb(210, 11, 11); */
+  border: 1px solid transparent;
+  background: #ffff;
+  border-radius: 0%;
+  outline: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -18,16 +18,6 @@ export const CustomModal = ({ ChildForm }) => {
         backdrop="static"
         keyboard={false}
       >
-        {/* <Modal.Header closeButton>
-          <Modal.Title>{child}</Modal.Title>
-        </Modal.Header> */}
-        {/* <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Eum voluptate error repellendus id ipsa! Cum maxime, magnam ipsum
-          delectus incidunt mollitia amet. Deleniti aspernatur excepturi
-          asperiores pariatur dolorem earum delectus.
-        </Modal.Body> */}
 
         {child === "Select Distributor" ? (
           <>

@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup, ListGroup, Spinner } from "react-bootstrap";
+import { DataContext } from "../../contexts/DataContext.jsx";
 import AXIOS from "../../shared/api.js";
 
-
 export const Depot = () => {
+  const { handleDepot, depot, division, distributor } = useContext(DataContext);
   const [data, setData] = useState("");
+  const dist_id = distributor?.customer_code;
+  const div_code = division?.division_code;
 
   useEffect(() => {
-    AXIOS.get("/api/feed/dist_depot/E?dist_id=15751&dc=36")
+    AXIOS.get(`/api/feed/dist_depot/E?dist_id=${dist_id}&dc=${div_code}`)
       .then((res) => {
         setData(res.data.data);
       })
       .catch((err) => {
         console.log("Error--->", err);
       });
-  }, []);
+  }, [division]);
 
-  console.log("data====>", data);
+  // console.log("Depot====>", depot);
 
   return (
     <div>
@@ -36,18 +39,22 @@ export const Depot = () => {
         </Button>
       </InputGroup>
 
-      <ListGroup>
+      <ul>
         {data ? (
           data.map((ele, i) => {
             return (
-              <ListGroup.Item>
-                <Form.Check
-                  type="radio"
-                  label={ele.location_name}
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios1"
-                />
-              </ListGroup.Item>
+              <>
+                <li
+                  key={i}
+                  onClick={(e) => {
+                    handleDepot(ele);
+                  }}
+                >
+                  <input type="radio" name="location_name" id={i} />
+                  <label htmlFor={i}>{ele.location_name}</label>
+                </li>
+                <hr />
+              </>
             );
           })
         ) : (
@@ -55,7 +62,7 @@ export const Depot = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         )}
-      </ListGroup>
+      </ul>
     </div>
   );
 };

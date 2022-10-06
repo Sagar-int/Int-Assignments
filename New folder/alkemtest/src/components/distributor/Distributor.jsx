@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup, ListGroup, Spinner } from "react-bootstrap";
 import { DataContext } from "../../contexts/DataContext.jsx";
 import AXIOS from "../../shared/api.js";
+import "./distributor.css";
 
 export const Distributor = () => {
+  const { handleDistributor, distributor } = useContext(DataContext);
   const [data, setData] = useState("");
-  const { handleUserId , userId} = useContext(DataContext);
 
   useEffect(() => {
     AXIOS.get("/api/distributor/distributor_list/E?dn=&page_no=1")
@@ -15,9 +16,11 @@ export const Distributor = () => {
       .catch((err) => {
         console.log("Error--->", err);
       });
+
+    return () => {};
   }, []);
 
-  console.log("userId====>", userId);
+  // console.log("Distributor====>", distributor);
 
   return (
     <div>
@@ -37,21 +40,30 @@ export const Distributor = () => {
         </Button>
       </InputGroup>
 
-      <ListGroup>
+      <ul>
         {data ? (
           data.map((ele, i) => {
             return (
-              <ListGroup.Item>
-                <Form.Check
-                  type="radio"
-                  onClick={(e)=>{handleUserId(ele.customer_code)}}
-                  label={
-                    ele.customer_name + "-" + ele.customer_code + " " + "("+ ele.location + ")"
-                  }
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios1"
-                />
-              </ListGroup.Item>
+              <>
+                <li
+                  key={i}
+                  onClick={(e) => {
+                    handleDistributor(ele);
+                  }}
+                >
+                  <input type="radio" name="customer_name" id={i} />
+                  <label htmlFor={i}>
+                    {ele.customer_name +
+                      "-" +
+                      ele.customer_code +
+                      " " +
+                      "(" +
+                      ele.location +
+                      ")"}
+                  </label>
+                </li>
+                <hr />
+              </>
             );
           })
         ) : (
@@ -59,7 +71,7 @@ export const Distributor = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         )}
-      </ListGroup>
+      </ul>
     </div>
   );
 };

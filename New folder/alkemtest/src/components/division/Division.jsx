@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup, ListGroup, Spinner } from "react-bootstrap";
+import { DataContext } from "../../contexts/DataContext.jsx";
 import AXIOS from "../../shared/api.js";
 
 export const Division = () => {
+  const { handleDivision, division, distributor } = useContext(DataContext);
   const [data, setData] = useState("");
+  const dist_id = distributor?.customer_code;
 
   useEffect(() => {
-    AXIOS.get("/api/feed/dist_divisions/E?dist_id=17961")
+    console.log("yes");
+    AXIOS.get(`/api/feed/dist_divisions/E?dist_id=${dist_id}`)
       .then((res) => {
         setData(res.data.data);
       })
       .catch((err) => {
         console.log("Error--->", err);
       });
-  }, []);
+  }, [distributor]);
 
-  console.log("data====>", data);
+  // console.log("Division====>", division);
 
   return (
     <div>
@@ -35,20 +39,22 @@ export const Division = () => {
         </Button>
       </InputGroup>
 
-      <ListGroup>
+      <ul>
         {data ? (
           data.map((ele, i) => {
             return (
-              <ListGroup.Item>
-                <Form.Check
-                  type="radio"
-                  label={
-                    ele.division_name
-                  }
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios1"
-                />
-              </ListGroup.Item>
+              <>
+                <li
+                  key={i}
+                  onClick={(e) => {
+                    handleDivision(ele);
+                  }}
+                >
+                  <input type="radio" name="division_name" id={i} />
+                  <label htmlFor={i}>{ele.division_name}</label>
+                </li>
+                <hr />
+              </>
             );
           })
         ) : (
@@ -56,7 +62,7 @@ export const Division = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         )}
-      </ListGroup>
+      </ul>
     </div>
   );
 };
