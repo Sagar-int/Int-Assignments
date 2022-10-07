@@ -5,13 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./components/homepage/HomePage";
 import { Dashboard } from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/privateroute/PrivateRoute";
-import { useSelector } from "react-redux/es/exports";
 import { ProductPage } from "./components/productpage/ProductPage";
 
 function App() {
-  const { isloggedin } = useSelector((state) => state.AuthReducer);
-
-  console.log("isloggedin==>", isloggedin);
 
   return (
     <div className="App">

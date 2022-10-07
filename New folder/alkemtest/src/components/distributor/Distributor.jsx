@@ -20,6 +20,14 @@ export const Distributor = () => {
     return () => {};
   }, []);
 
+  const ischecked = (element) => {
+    console.log("distributor and Element====>", distributor, element);
+    if (distributor === element) {
+      return true;
+    }
+    return false;
+  };
+
   // console.log("Distributor====>", distributor);
 
   return (
@@ -51,7 +59,13 @@ export const Distributor = () => {
                     handleDistributor(ele);
                   }}
                 >
-                  <input type="radio" name="customer_name" id={i} />
+                  {/* <input
+                    type="radio"
+                    name="customer_name"
+                    id={i}
+                    checked={() => ischecked(ele)}
+                  />
+
                   <label htmlFor={i}>
                     {ele.customer_name +
                       "-" +
@@ -60,7 +74,23 @@ export const Distributor = () => {
                       "(" +
                       ele.location +
                       ")"}
-                  </label>
+                  </label> */}
+
+                  <Form.Check
+                    type="radio"
+                    label={` ${
+                      ele.customer_name +
+                      "-" +
+                      ele.customer_code +
+                      " " +
+                      "(" +
+                      ele.location +
+                      ")"
+                    }`}
+                    defaultChecked={
+                      ele.customer_code === distributor?.customer_code
+                    }
+                  />
                 </li>
                 <hr />
               </>

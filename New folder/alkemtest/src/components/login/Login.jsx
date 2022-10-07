@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import { Button } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import "./login.css";
 import { useNavigate } from "react-router-dom";

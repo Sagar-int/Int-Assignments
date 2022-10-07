@@ -50,8 +50,11 @@ export const Depot = () => {
                     handleDepot(ele);
                   }}
                 >
-                  <input type="radio" name="location_name" id={i} />
-                  <label htmlFor={i}>{ele.location_name}</label>
+                  <Form.Check
+                    type="radio"
+                    label={` ${ele.location_name}`}
+                    defaultChecked={ele.cfa_code === depot?.cfa_code}
+                  />
                 </li>
                 <hr />
               </>

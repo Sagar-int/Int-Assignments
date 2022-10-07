@@ -1,24 +1,26 @@
 import { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  CloseButton,
-  Col,
-  Container,
-  Form,
-  FormControl,
-  InputGroup,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Container, Row, Toast } from "react-bootstrap";
 import { DataContext } from "../../contexts/DataContext";
 import { CustomModal } from "../modal/CustomModal";
 import "./productpage.css";
 import AXIOS from "../../shared/api.js";
 
 export const ProductPage = () => {
-  const { distributor, division, depot, handleShow, handleDistributor, handleDivision, handleDepot, prodList, setProdList } =
-    useContext(DataContext);
-  // const [prodList, setProdList] = useState("");
+  const {
+    distributor,
+    division,
+    depot,
+    handleShow,
+    handleDistributor,
+    handleDivision,
+    handleDepot,
+    prodList,
+    setProdList,
+    listCount,
+    setListCount,
+    text,
+    setText,
+  } = useContext(DataContext);
 
   const dist_id = distributor?.customer_code;
   const div_code = division?.division_code;
@@ -31,6 +33,8 @@ export const ProductPage = () => {
       )
         .then((res) => {
           setProdList(res.data.data);
+          setListCount(res.data.count.count);
+          setText("");
         })
         .catch((err) => {
           console.log("Error--->", err);
@@ -38,13 +42,34 @@ export const ProductPage = () => {
     }
   }, [depot]);
 
-  console.log("prodList===>", prodList);
+  //For Searching the Product
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      AXIOS.get(
+        `/api/product/all_product_list/E/${cfa_code}?dist_id=${dist_id}&page=1&sv=&div_code=${div_code}&product_nm=${text}`
+      )
+        .then((res) => {
+          setProdList(res.data.data);
+          setListCount(res.data.count.count);
+        })
+        .catch((err) => {
+          console.log("Error--->", err);
+        });
+    }, 2000);
 
+    return () => clearTimeout(getData);
+  }, [text]);
+
+  //managing states for Toast
+  const [showA, setShowA] = useState(true);
+  // const toggleShowA = () => setShowA(!showA);
+
+  // console.log("prodList, listCount===>", prodList, listCount);
   return (
     <>
       <div className="top_div">
         <h3>
-          Products <span>(Total: 0)</span>
+          Products <span>(Total: {listCount ? listCount : 0})</span>
         </h3>
       </div>
 
@@ -171,9 +196,28 @@ export const ProductPage = () => {
             )}
           </Col>
 
-          <Col xs={12} sm={4} className="prod_cols">
-            <Button variant="outline-secondary" size="lg" disabled>
-              Search by Products/Code/Composition
+          <Col xs={12} sm={3} className="prod_cols">
+            <input
+              placeholder="Search by Products/Code/Composition"
+              onChange={(event) => setText(event.target.value)}
+              disabled={!depot}
+              value={text}
+            />
+          </Col>
+          <Col xs={6} sm={1} className="prod_filter_cols">
+            <Button
+              onClick={() => handleShow("Sort")}
+              className="filter_btn"
+              variant="outline-secondary"
+              size="lg"
+              disabled={!prodList}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3839/3839020.png"
+                alt="filter"
+                width="25"
+                height="25"
+              />
             </Button>
           </Col>
         </Row>
@@ -185,16 +229,17 @@ export const ProductPage = () => {
       {prodList ? (
         prodList.length > 0 ? (
           prodList.map((ele, i) => {
+
             return (
               <Container key={i} fluid="lg" className="prod_list_container">
                 <Row>
                   <Col xs={12} sm={10} className="prod_list_cols">
-                    <h4>
+                    <h5>
                       {ele.product_name} ({ele.pro_code})
-                    </h4>
+                    </h5>
                   </Col>
                   <Col xs={12} sm={2} className="prod_list_cols">
-                    <h4>PTS: ₹ {ele.ptd}/-</h4>
+                    <h5>PTS: ₹ {ele.ptd}/-</h5>
                   </Col>
                 </Row>
                 <hr />
@@ -211,8 +256,18 @@ export const ProductPage = () => {
                     <p>Packing : {ele.unit_description}</p>
                   </Col>
                   <Col xs={12} sm={2} className="prod_list_cols">
-                    <Button variant="link">More Details</Button>
+                    <Button  onClick={()=> setShowA(!showA)} variant="link">
+                      More Details
+                    </Button>
                   </Col>
+                </Row>
+
+                <Row>
+                  <Toast  show={showA} onClose={()=> setShowA(!showA)}>
+                    <Toast.Body>
+                      Woohoo, you're reading this text in a Toast!
+                    </Toast.Body>
+                  </Toast>
                 </Row>
               </Container>
             );

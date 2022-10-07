@@ -9,7 +9,6 @@ export const Division = () => {
   const dist_id = distributor?.customer_code;
 
   useEffect(() => {
-    console.log("yes");
     AXIOS.get(`/api/feed/dist_divisions/E?dist_id=${dist_id}`)
       .then((res) => {
         setData(res.data.data);
@@ -50,8 +49,13 @@ export const Division = () => {
                     handleDivision(ele);
                   }}
                 >
-                  <input type="radio" name="division_name" id={i} />
-                  <label htmlFor={i}>{ele.division_name}</label>
+                  <Form.Check
+                    type="radio"
+                    label={` ${ele.division_name}`}
+                    defaultChecked={
+                      ele.division_code === division?.division_code
+                    }
+                  />
                 </li>
                 <hr />
               </>

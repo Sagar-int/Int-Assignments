@@ -5,6 +5,7 @@ import { DataContext } from "../../contexts/DataContext";
 import { Depot } from "../depot/Depot";
 import { Distributor } from "../distributor/Distributor";
 import { Division } from "../division/Division";
+import { Sort } from "../sort/Sort";
 
 export const CustomModal = ({ ChildForm }) => {
   const { show, child, handleClose } = useContext(DataContext);
@@ -15,10 +16,9 @@ export const CustomModal = ({ ChildForm }) => {
         show={show}
         onHide={handleClose}
         size="lg"
-        backdrop="static"
+        // backdrop="static"
         keyboard={false}
       >
-
         {child === "Select Distributor" ? (
           <>
             <Modal.Header closeButton>
@@ -44,6 +44,15 @@ export const CustomModal = ({ ChildForm }) => {
             </Modal.Header>
             <Modal.Body>
               <Depot />
+            </Modal.Body>
+          </>
+        ) : child === "Sort" ? (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{child}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Sort />
             </Modal.Body>
           </>
         ) : null}
