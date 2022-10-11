@@ -61,10 +61,10 @@ export const ProductPage = () => {
   }, [text]);
 
   //managing states for Toast
-  const [showA, setShowA] = useState(true);
-  // const toggleShowA = () => setShowA(!showA);
+  const [show, setShow] = useState(-1);
 
-  // console.log("prodList, listCount===>", prodList, listCount);
+  const toggleShow = (index) => setShow(index);
+
   return (
     <>
       <div className="top_div">
@@ -229,7 +229,6 @@ export const ProductPage = () => {
       {prodList ? (
         prodList.length > 0 ? (
           prodList.map((ele, i) => {
-
             return (
               <Container key={i} fluid="lg" className="prod_list_container">
                 <Row>
@@ -256,16 +255,34 @@ export const ProductPage = () => {
                     <p>Packing : {ele.unit_description}</p>
                   </Col>
                   <Col xs={12} sm={2} className="prod_list_cols">
-                    <Button  onClick={()=> setShowA(!showA)} variant="link">
-                      More Details
+                    <Button
+                      onClick={() =>
+                        show === i ? toggleShow(-1) : toggleShow(i)
+                      }
+                      variant="link"
+                    >
+                      {show === i ? "Hide Details" : "More Details"}
                     </Button>
                   </Col>
                 </Row>
 
                 <Row>
-                  <Toast  show={showA} onClose={()=> setShowA(!showA)}>
+                  <Toast
+                    className="toast_div"
+                    show={show === i}
+                    onClose={() => toggleShow(-1)}
+                  >
                     <Toast.Body>
-                      Woohoo, you're reading this text in a Toast!
+                      <div className="toast_flex">
+                        <div>
+                          <p>Division :</p>
+                          <p>Composition :</p>
+                        </div>
+                        <div>
+                          <p>{ele.division_name}</p>
+                          <p>{ele.composition}</p>
+                        </div>
+                      </div>
                     </Toast.Body>
                   </Toast>
                 </Row>
