@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Swal from 'sweetalert2';
 import './signup.css';
 
 export const Signup = () => {
@@ -31,7 +32,13 @@ export const Signup = () => {
     await axios.post('http://localhost:5000/api/auth/signup', values);
 		actions.setSubmitting(false);
 		actions.resetForm();
-		alert(`User successfully created`);
+		Swal.fire({
+			// position: 'top-end',
+			icon: 'success',
+			title: 'User successfully created',
+			showConfirmButton: false,
+			timer: 2000
+		  })
 	};
 
 	return (

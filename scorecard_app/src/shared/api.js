@@ -17,7 +17,15 @@ instance.interceptors.request.use(
 
 		config.headers['Authorization'] = token;
 
-		return config;
+		// return config;
+		return window.navigator.onLine
+		? config
+		: Promise.reject({
+				response: {
+					data: { message: 'Check your internet connection', status: 1 },
+					status: 400,
+				},
+		  });
 	},
 	(error) => {
 		return Promise.reject(error);

@@ -7,6 +7,7 @@ import { Formik, Form as FormikForm } from 'formik';
 import { addSkillDetails, editSkillDetails } from '../../../actions/part2.action';
 import { useContext } from 'react';
 import { DataContext } from '../../../contexts/DataContext';
+import Swal from 'sweetalert2';
 
 export const CoScolasticForm = () => {
 	const { editRow, id, handleClose } = useContext(DataContext);
@@ -55,7 +56,10 @@ export const CoScolasticForm = () => {
 		dispatch(addSkillDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
-		alert(`${values.skill} skill added successfully`);
+		Swal.fire(
+			`${values.skill} skill added successfully`,
+			` Click on "Ok" button to add another skill.`
+		);
 	};
 
 	const handleEditSkill = (values, actions) => {
@@ -88,7 +92,7 @@ export const CoScolasticForm = () => {
 										name="skill"
 										isValid={!errors.skill && touched.skill}
 										isInvalid={errors.skill && touched.skill}
-										disabled = {!editRow}
+										disabled={!editRow}
 									>
 										<option disabled value="">
 											--Please choose a skill--
@@ -125,7 +129,6 @@ export const CoScolasticForm = () => {
 										isValid={!errors.grade && touched.grade}
 										isInvalid={errors.grade && touched.grade}
 									>
-
 										{editRow ? (
 											<option disabled value="">
 												--Please choose a grade--

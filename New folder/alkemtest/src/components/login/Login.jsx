@@ -51,7 +51,7 @@ export const Login = () => {
         actions.resetForm();
         dispatch(setupUserLogin(res.data));
         actions.setSubmitting(false);
-		alert("Login Successfully")
+        alert("Login Successfully");
         navigate("/dashboard");
       })
       .catch((err) => {

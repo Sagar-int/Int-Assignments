@@ -1,7 +1,7 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable default-case */
 // import axios from 'axios';
-import AXIOS from "../../../shared/api.js";
+import AXIOS from '../../../shared/api.js';
 
 import { Formik, Form as FormikForm } from 'formik';
 // import { useEffect } from 'react';
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { setupUserLogin } from '../../../actions/auth.action';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const Login = () => {
 	// const { userData, email, auth_token } = useSelector((state) => state.AcademicReducer);
@@ -36,13 +37,24 @@ export const Login = () => {
 	};
 
 	const handleUserLogin = async (values, actions) => {
-		const { data } = await AXIOS.post('/auth/login', values);
-		console.log('result===>', data);
-		dispatch(setupUserLogin(data));
-		actions.setSubmitting(false);
-		actions.resetForm();
-		navigate('/');
-		alert(`logged in successfully`);
+		try {
+			const { data } = await AXIOS.post('/auth/login', values);
+			dispatch(setupUserLogin(data));
+			actions.setSubmitting(false);
+			actions.resetForm();
+			navigate('/');
+			// alert(`logged in successfully`);
+			Swal.fire({
+				// position: 'top-end',
+				icon: 'success',
+				title: 'logged in successfully',
+				showConfirmButton: false,
+				timer: 2000
+			  })
+		} catch (err) {
+			console.log('LoginError..>>>>>>>', err);
+			actions.setErrors(err);
+		}
 	};
 
 	return (

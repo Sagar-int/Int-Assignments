@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { Formik, Form as FormikForm } from 'formik';
 import { useContext } from 'react';
 import { DataContext } from '../../../contexts/DataContext';
+import Swal from 'sweetalert2';
 
 export const ScolasticForm = () => {
 	const { editRow, id, handleClose } = useContext(DataContext);
@@ -89,7 +90,10 @@ export const ScolasticForm = () => {
 		dispatch(addSubjectDetails(values));
 		actions.setSubmitting(false);
 		actions.resetForm();
-		alert(`${values.subject} subject added successfully`);
+		Swal.fire(
+			`${values.subject} subject added successfully`,
+			` Click on "Ok" button to add another subject.`,
+		  )
 	};
 
 	const handleEditSubject = (values, actions) => {
